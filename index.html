@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft Friends Installer</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="grass-block">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <rect width="16" height="16" fill="#8B5E3C"/>
+        <rect y="0" width="16" height="5" fill="#4CAF50"/>
+        <rect x="0" y="0" width="16" height="1" fill="#5DBB63"/>
+        <rect x="2" y="1" width="2" height="1" fill="#66BB6A"/>
+        <rect x="7" y="1" width="3" height="1" fill="#66BB6A"/>
+        <rect x="12" y="1" width="2" height="1" fill="#66BB6A"/>
+        <rect x="4" y="2" width="2" height="1" fill="#5DBB63"/>
+        <rect x="10" y="2" width="2" height="1" fill="#5DBB63"/>
+        <rect x="1" y="3" width="1" height="1" fill="#81C784"/>
+        <rect x="6" y="3" width="1" height="1" fill="#81C784"/>
+        <rect x="13" y="3" width="1" height="1" fill="#81C784"/>
+      </svg>
+    </div>
+    MC FRIENDS
+  </div>
+  <ul class="nav-links">
+    <li><a href="#que-hace">¿Qué hace?</a></li>
+    <li><a href="#instalar">Instalar</a></li>
+    <li><a href="#servidor">Servidor</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="stars" id="stars"></div>
+
+  <div class="hero-eyebrow">&#x2588; Proyecto privado &#x2022; Para amigos &#x2022; Open Source</div>
+
+  <h1 class="hero-title">
+    MINECRAFT<br>
+    <span class="accent">FRIENDS</span> <span class="gold">INSTALLER</span><span class="cursor"></span>
+  </h1>
+
+  <p class="hero-sub">
+    Un solo script. Sin configurar nada. En minutos tienes Java, TLauncher y el servidor favorito listos para jugar.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#instalar" class="btn btn-primary">&#x25BA; DESCARGAR INSTALADOR</a>
+    <a href="#que-hace" class="btn btn-secondary">&#x2753; VER COMO FUNCIONA</a>
+  </div>
+</div>
+
+<!-- DIRT DIVIDER -->
+<div class="dirt-divider"></div>
+
+<!-- QUE HACE -->
+<section id="que-hace">
+  <div class="section-label reveal">&#x25B6; Características</div>
+  <h2 class="section-title reveal">Todo automático,<br>tú solo juega.</h2>
+  <p class="section-desc reveal">El instalador detecta tu sistema operativo y hace todo el trabajo por ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando cómo instalar Java.</p>
+
+  <div class="features-grid reveal">
+    <div class="feature-card">
+      <span class="feature-icon">&#x2615;</span>
+      <div class="feature-title">Java automático</div>
+      <div class="feature-desc">Detecta si tienes Java instalado y lo descarga si no. Sin buscar versiones, sin configurar variables de entorno.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F3AE;</span>
+      <div class="feature-title">TLauncher incluido</div>
+      <div class="feature-desc">Descarga e instala TLauncher automáticamente. Solo abre, crea tu usuario y empieza a jugar.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F310;</span>
+      <div class="feature-title">Servidor preconfigurado</div>
+      <div class="feature-desc">El servidor de los amigos ya viene cargado. No tienes que escribir ninguna IP a mano.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F4BB;</span>
+      <div class="feature-title">Windows y macOS</div>
+      <div class="feature-desc">PowerShell para Windows 10/11. Bash para Mac Intel y Apple Silicon (M1, M2, M3...).</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F517;</span>
+      <div class="feature-title">Acceso directo</div>
+      <div class="feature-desc">Crea un acceso directo en el escritorio para que abrir TLauncher sea un doble clic.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F4CB;</span>
+      <div class="feature-title">Registro de errores</div>
+      <div class="feature-desc">Si algo falla, guarda un log con el detalle. Compártelo por WhatsApp y en minutos está resuelto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRT DIVIDER -->
+<div class="dirt-divider"></div>
+
+<!-- INSTALAR -->
+<div class="steps-bg" id="instalar">
+  <section>
+    <div class="section-label reveal">&#x25B6; Instalación</div>
+    <h2 class="section-title reveal">¿Cómo se instala?</h2>
+    <p class="section-desc reveal">Elige tu sistema operativo y sigue los pasos. En serio, son muy pocos.</p>
+
+    <div class="os-tabs reveal">
+      <button class="os-tab active" onclick="switchOS('win')">&#x1F5A5; Windows</button>
+      <button class="os-tab" onclick="switchOS('mac')">&#xF8FF; macOS</button>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-list reveal">
+        <div class="step-item active" data-step="0" onclick="setStep(0)">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Descarga el instalador</div>
+            <div class="step-desc">Ve a Releases en GitHub y descarga el archivo para tu sistema operativo.</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="1" onclick="setStep(1)">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title" id="step2title">Ejecuta como administrador</div>
+            <div class="step-desc" id="step2desc">Clic derecho en install.ps1 → "Ejecutar con PowerShell". Acepta si te pide permisos.</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="2" onclick="setStep(2)">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Espera que termine</div>
+            <div class="step-desc">El script instala Java, TLauncher y configura todo solo. Demora 2–5 minutos dependiendo de tu internet.</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="3" onclick="setStep(3)">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-title">Abre TLauncher y juega</div>
+            <div class="step-desc">TLauncher abre automáticamente. Crea un usuario, elige la versión del servidor y entra al mundo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+            <span class="terminal-title" id="term-title">Windows PowerShell</span>
+          </div>
+          <div class="terminal-body" id="term-body">
+            <div class="term-line"><span class="term-ps">PS C:\Users\Tú&gt;</span><span class="term-cmd">.\install.ps1</span></div>
+            <div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
+            <div class="term-output term-ok">[OK] Windows 11 detectado.</div>
+            <div class="term-output term-info">[INFO] Verificando Java...</div>
+            <div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
+            <div class="term-output term-ok">[OK] Java 21 instalado correctamente.</div>
+            <div class="term-output term-info">[INFO] Descargando TLauncher...</div>
+            <div class="term-output term-ok">[OK] TLauncher instalado.</div>
+            <div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
+            <div class="term-output term-ok">[OK] Servidor agregado correctamente.</div>
+            <div class="term-output term-info">[INFO] Creando acceso directo...</div>
+            <div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
+            <div class="term-line"><span class="term-ps">PS C:\Users\Tú&gt;</span><span class="term-cursor"></span></div>
+          </div>
+        </div>
+
+        <div class="one-liner">
+          <code id="one-liner-cmd">iwr -useb https://raw.githubusercontent.com/.../install.ps1 | iex</code>
+          <button class="copy-btn" onclick="copyCmd()">&#x2398; COPIAR</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- REQUISITOS -->
+<section>
+  <div class="section-label reveal">&#x25B6; Requisitos</div>
+  <h2 class="section-title reveal">Lo que necesitas</h2>
+  <div class="req-grid reveal">
+    <div class="req-card">
+      <span class="req-icon">&#x1F4BE;</span>
+      <div>
+        <div class="req-label">Almacenamiento</div>
+        <div class="req-value">~500 MB libres</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <span class="req-icon">&#x1F4CA;</span>
+      <div>
+        <div class="req-label">RAM mínima</div>
+        <div class="req-value">4 GB usables</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <span class="req-icon">&#x1F4F6;</span>
+      <div>
+        <div class="req-label">Conexión</div>
+        <div class="req-value">Internet requerido</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <span class="req-icon">&#x1F5A5;</span>
+      <div>
+        <div class="req-label">Windows</div>
+        <div class="req-value">10 / 11</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <span class="req-icon">&#xF8FF;</span>
+      <div>
+        <div class="req-label">macOS</div>
+        <div class="req-value">Intel + Apple Silicon</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <span class="req-icon">&#x2615;</span>
+      <div>
+        <div class="req-label">Java</div>
+        <div class="req-value">Lo instala solo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRT DIVIDER -->
+<div class="dirt-divider"></div>
+
+<!-- SERVIDOR -->
+<section id="servidor">
+  <div class="section-label reveal">&#x25B6; El servidor</div>
+  <h2 class="section-title reveal">¿A dónde nos conectamos?</h2>
+  <p class="section-desc reveal">
+    El instalador ya configura el servidor automáticamente. Pero si necesitas conectarte a mano, acá están los datos.
+  </p>
+
+  <div class="server-card reveal">
+    <div>
+      <div class="server-label">Estado</div>
+      <div class="server-value"><span class="status-dot"></span>ONLINE</div>
+    </div>
+    <div>
+      <div class="server-label">Dirección IP / Host</div>
+      <div class="server-value">tu-servidor.falix.gg</div>
+    </div>
+    <div>
+      <div class="server-label">Puerto</div>
+      <div class="server-value">25565</div>
+    </div>
+    <div>
+      <div class="server-label">Versión</div>
+      <div class="server-value">1.20.x</div>
+    </div>
+    <div>
+      <div class="server-label">Modo</div>
+      <div class="server-value">Survival</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">&#x26A0; Recuerda actualizar estos datos con la IP real de tu servidor Falix antes de compartir la landing.</p>
+</section>
+
+<!-- FAQ -->
+<div class="steps-bg" id="faq">
+  <section>
+    <div class="section-label reveal">&#x25B6; Preguntas frecuentes</div>
+    <h2 class="section-title reveal">¿Algo no funcionó?</h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          El antivirus bloqueó el instalador en Windows ¿es seguro?
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          Sí, es seguro. Windows Defender a veces marca scripts de PowerShell descargados como sospechosos sin analizarlos. Puedes revisar el código en GitHub antes de ejecutarlo. Para omitir la advertencia, clic derecho en el archivo → Propiedades → marca "Desbloquear" y acepta.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          En Mac aparece "no se puede abrir porque el desarrollador es desconocido"
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          Es el Gatekeeper de macOS. Abre Terminal, ve a la carpeta donde descargaste el archivo y ejecuta <code>chmod +x install.sh</code> seguido de <code>./install.sh</code>. Si igual bloquea, ve a Preferencias del Sistema → Privacidad y Seguridad → permite la app.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿TLauncher es legal y gratuito?
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          TLauncher es un launcher no oficial que permite jugar de forma gratuita. No está vinculado a Mojang/Microsoft. Úsalo bajo tu responsabilidad; si tienes una cuenta oficial, te recomendamos el launcher oficial de Minecraft.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa si ya tengo Java instalado?
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          El instalador verifica primero. Si ya tienes Java compatible instalado, salta ese paso y continúa con TLauncher. Si tu versión de Java es incompatible, instala la correcta sin borrar la tuya.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          El servidor no aparece en TLauncher después de instalar
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor manualmente con la IP de arriba. Si el problema persiste, comparte el archivo <code>install-log.txt</code> con nosotros por WhatsApp.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuánta RAM asigno a Minecraft?
+          <span class="faq-arrow">&#x25BA;</span>
+        </button>
+        <div class="faq-a">
+          En TLauncher, ve a Configuración → JVM Arguments y ajusta <code>-Xmx</code>. Para juego fluido recomendamos 2–3 GB si tienes 8 GB de RAM en total. No asignes más del 50–60% de tu RAM total.
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">&#x2588;&#x2588; MC FRIENDS INSTALLER &#x2588;&#x2588;</div>
+  <div class="footer-sub">Hecho con amor (y muchos bloques) para jugar juntos &#x2764;</div>
+  <div class="footer-links">
+    <a href="#">GitHub</a>
+    <a href="#">Releases</a>
+    <a href="#">Reportar error</a>
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted);">MIT License &mdash; Proyecto privado entre amigos &mdash; No afiliado a Mojang ni Microsoft</div>
+</footer>
+
+<script>
+const osData = {
+  win: {
+    step2title: 'Ejecuta como administrador',
+    step2desc: 'Clic derecho en install.ps1 → "Ejecutar con PowerShell". Acepta si te pide permisos.',
+    termTitle: 'Windows PowerShell',
+    termBody: `<div class="term-line"><span class="term-ps">PS C:\\Users\\Tú&gt;</span><span class="term-cmd">.\\install.ps1</span></div>
+<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
+<div class="term-output term-ok">[OK] Windows 11 detectado.</div>
+<div class="term-output term-info">[INFO] Verificando Java...</div>
+<div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
+<div class="term-output term-ok">[OK] Java 21 instalado correctamente.</div>
+<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
+<div class="term-output term-ok">[OK] TLauncher instalado.</div>
+<div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
+<div class="term-output term-ok">[OK] Servidor agregado correctamente.</div>
+<div class="term-output term-info">[INFO] Creando acceso directo...</div>
+<div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
+<div class="term-line"><span class="term-ps">PS C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
+    cmd: 'iwr -useb https://raw.githubusercontent.com/.../install.ps1 | iex'
+  },
+  mac: {
+    step2title: 'Dale permisos de ejecución',
+    step2desc: 'En Terminal: chmod +x install.sh && ./install.sh — si Gatekeeper bloquea, ve a Privacidad y Seguridad.',
+    termTitle: 'macOS Terminal — zsh',
+    termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">chmod +x install.sh && ./install.sh</span></div>
+<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
+<div class="term-output term-ok">[OK] macOS Apple Silicon (M2) detectado.</div>
+<div class="term-output term-info">[INFO] Verificando Java...</div>
+<div class="term-output term-warn">[WARN] Java no encontrado. Instalando (arm64)...</div>
+<div class="term-output term-ok">[OK] Java 21 Temurin instalado correctamente.</div>
+<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
+<div class="term-output term-ok">[OK] TLauncher.jar descargado.</div>
+<div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
+<div class="term-output term-ok">[OK] Servidor agregado en servers.dat.</div>
+<div class="term-output term-info">[INFO] Creando alias en el Dock...</div>
+<div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
+<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
+    cmd: 'curl -fsSL https://raw.githubusercontent.com/.../install.sh | bash'
+  }
+};
+
+let currentOS = 'win';
+
+function switchOS(os) {
+  currentOS = os;
+  document.querySelectorAll('.os-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && os === 'win') || (i === 1 && os === 'mac'));
+  });
+  const d = osData[os];
+  document.getElementById('step2title').textContent = d.step2title;
+  document.getElementById('step2desc').textContent = d.step2desc;
+  document.getElementById('term-title').textContent = d.termTitle;
+  document.getElementById('term-body').innerHTML = d.termBody;
+  document.getElementById('one-liner-cmd').textContent = d.cmd;
+  setStep(0);
+}
+
+function setStep(idx) {
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+}
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+function copyCmd() {
+  const cmd = document.getElementById('one-liner-cmd').textContent;
+  navigator.clipboard.writeText(cmd).catch(() => {});
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = '✓ COPIADO';
+  setTimeout(() => { btn.textContent = '⌘ COPIAR'; }, 1500);
+}
+
+// Stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.animationDuration = (2 + Math.random() * 3) + 's';
+  if (Math.random() > 0.7) { s.style.width = '4px'; s.style.height = '4px'; }
+  starsEl.appendChild(s);
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
