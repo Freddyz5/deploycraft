@@ -168,11 +168,11 @@
 							<div class="step-num">02</div>
 							<div class="step-body">
 								<div class="step-title" id="step2title">
-									Ejecuta como administrador
+									Doble clic en install.bat
 								</div>
 								<div class="step-desc" id="step2desc">
-									Clic derecho en install.ps1 → "Ejecutar con PowerShell".
-									Acepta si te pide permisos.
+									Si Windows Defender pregunta, clic en "Más información" →
+									"Ejecutar de todas formas".
 								</div>
 							</div>
 						</div>
@@ -204,14 +204,12 @@
 								<div class="dot dot-red"></div>
 								<div class="dot dot-yellow"></div>
 								<div class="dot dot-green"></div>
-								<span class="terminal-title" id="term-title"
-									>Windows PowerShell</span
-								>
+								<span class="terminal-title" id="term-title">Windows - CMD</span>
 							</div>
 							<div class="terminal-body" id="term-body">
 								<div class="term-line">
-									<span class="term-ps">PS C:\Users\Tú&gt;</span
-									><span class="term-cmd">.\install.ps1</span>
+									<span class="term-ps">C:\Users\Tú&gt;</span
+									><span class="term-cmd">install.bat</span>
 								</div>
 								<div class="term-output term-info">
 									[INFO] Detectando sistema operativo...
@@ -226,7 +224,7 @@
 									[WARN] Java no encontrado. Instalando...
 								</div>
 								<div class="term-output term-ok">
-									[OK] Java 21 instalado correctamente.
+									[OK] Java 21 instalado y verificado.
 								</div>
 								<div class="term-output term-info">
 									[INFO] Descargando TLauncher...
@@ -236,16 +234,16 @@
 									[INFO] Configurando servidor favorito...
 								</div>
 								<div class="term-output term-ok">
-									[OK] Servidor agregado correctamente.
+									[OK] TLauncher OK (45823102 bytes).
 								</div>
 								<div class="term-output term-info">
-									[INFO] Creando acceso directo...
+									[INFO] Configurando servidor...
 								</div>
 								<div class="term-output term-ok">
-									[OK] ¡Todo listo! Abriendo TLauncher...
+									[OK] Servidor DeployCraft preconfigurado.
 								</div>
 								<div class="term-line">
-									<span class="term-ps">PS C:\Users\Tú&gt;</span
+									<span class="term-ps">C:\Users\Tú&gt;</span
 									><span class="term-cursor"></span>
 								</div>
 							</div>
@@ -253,8 +251,7 @@
 
 						<div class="one-liner">
 							<code id="one-liner-cmd"
-								>iwr -useb https://raw.githubusercontent.com/.../install.ps1 |
-								iex</code
+								>https://github.com/Freddyz5/deploycraft/releases/latest/download/install.bat</code
 							>
 							<button class="copy-btn" onclick="copyCmd()">
 								&#x2398; COPIAR

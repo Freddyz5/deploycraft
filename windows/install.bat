@@ -4,23 +4,29 @@ title DeployCraft Installer
 color 0A
 
 :: ============================================================
-::  DeployCraft Installer - Windows v2.0.0
+::  DeployCraft Installer - Windows v3.0.0
 ::  FIX: Java post-install verify, PATH correcto,
 ::       msiexec /wait real, check TLauncher proceso
 :: ============================================================
 
-set "VERSION=2.0.0"
-set "TLAUNCHER_URL=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/TLauncher.jar"
-set "SERVERS_DAT_URL=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/servers.dat"
+set "VERSION=3.0.0"
+set "RELEASES_BASE=https://github.com/Freddyz5/deploycraft/releases/latest/download"
+set "TLAUNCHER_URL=%RELEASES_BASE%/TLauncher.jar"
+set "SERVERS_DAT_URL=%RELEASES_BASE%/servers.dat"
 set "JAVA_URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5+11/OpenJDK21U-jdk_x64_windows_hotspot_21.0.5_11.msi"
 set "JAVA_MSI=%TEMP%\java21_deploycraft.msi"
 set "INSTALL_DIR=%USERPROFILE%\TLauncher"
 set "MC_DIR=%APPDATA%\.minecraft"
 set "LOG_FILE=%USERPROFILE%\Desktop\deploycraft-install.log"
+set "MSI_LOG=%USERPROFILE%\Desktop\deploycraft-java-msi.log"
 set "SHORTCUT=%USERPROFILE%\Desktop\TLauncher.bat"
 set "JAVA_EXE=java"
 
 if exist "%LOG_FILE%" del "%LOG_FILE%"
+if exist "%MSI_LOG%" del "%MSI_LOG%"
+
+call :ensure_admin
+if errorlevel 1 exit /b 1
 
 call :log "============================================"
 call :log " DeployCraft Installer v%VERSION%"
@@ -67,16 +73,31 @@ if not exist "%JAVA_MSI%" (
 )
 
 call :info "Instalando Java 21... no cierres esta ventana (1-2 min)..."
-call :log "Ejecutando msiexec con /wait..."
+call :log "Ejecutando msiexec con log verbose en %MSI_LOG%..."
 
-:: FIX 3: START /WAIT garantiza que msiexec bloquea hasta terminar
-start /wait "" msiexec /i "%JAVA_MSI%" /quiet /norestart
+:: Ejecutar MSI elevado con log detallado para diagnosticar 1603
+msiexec /i "%JAVA_MSI%" INSTALLLEVEL=1 /L*V "%MSI_LOG%" /quiet /norestart
 set "MSI_CODE=!errorlevel!"
-del "%JAVA_MSI%" >nul 2>&1
+
+if !MSI_CODE! equ 0 (
+    del "%JAVA_MSI%" >nul 2>&1
+)
+
+if !MSI_CODE! equ 3010 (
+    call :warn "Java se instalo pero Windows pide reiniciar antes de usarlo."
+    call :log "WARN: msiexec devolvio 3010 (reinicio requerido)."
+    call :warn "Reinicia tu PC y vuelve a ejecutar el instalador para continuar."
+    call :abort
+    exit /b 1
+)
 
 if !MSI_CODE! neq 0 (
     call :error "Fallo la instalacion de Java. Codigo: !MSI_CODE!"
     call :log "ERROR: msiexec codigo !MSI_CODE!"
+    if !MSI_CODE! equ 1603 (
+        call :warn "El MSI fallo con 1603. Normalmente es por permisos, reinicio pendiente o una instalacion previa rota."
+        call :warn "Revisa tambien el log: %MSI_LOG%"
+    )
     call :abort
     exit /b 1
 )
@@ -318,9 +339,27 @@ echo  ============================================
 echo  Instalacion interrumpida.
 echo  Revisa el log en tu Escritorio:
 echo    deploycraft-install.log
+echo    deploycraft-java-msi.log
 echo  Manda ese archivo por WhatsApp para ayuda.
 echo  ============================================
 echo.
 call :log "Instalacion ABORTADA."
 pause
 goto :eof
+
+:ensure_admin
+net session >nul 2>&1
+if %errorlevel% equ 0 goto :eof
+
+echo.
+echo  [*] Se requieren permisos de administrador para instalar Java.
+echo  [*] Acepta el aviso de Windows para continuar.
+echo.
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "try { Start-Process -FilePath '%~f0' -Verb RunAs } catch { exit 1 }"
+
+if errorlevel 1 (
+    echo  [ERROR] No se pudo elevar permisos o se cancelo el aviso de Windows.
+    pause
+)
+exit /b 1

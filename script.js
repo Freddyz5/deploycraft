@@ -1,6 +1,6 @@
 // ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
 const RELEASES_BASE =
-	"https://github.com/Freddyz5/deploycraft/releases/download/v3.0.0";
+	"https://github.com/Freddyz5/deploycraft/releases/latest/download";
 
 const osConfig = {
 	win: {
@@ -130,11 +130,28 @@ function setStep(idx) {
 		.forEach((el, i) => el.classList.toggle("active", i === idx));
 }
 
-function copyCmd() {
+function promptManualCopy(text) {
+	window.prompt("Copia este enlace manualmente:", text);
+	return false;
+}
+
+async function copyCmd() {
 	const cmd = document.getElementById("one-liner-cmd").textContent;
-	navigator.clipboard.writeText(cmd).catch(() => {});
 	const btn = document.querySelector(".copy-btn");
-	btn.textContent = "✓ COPIADO";
+	let copied = false;
+
+	try {
+		if (navigator.clipboard && window.isSecureContext) {
+			await navigator.clipboard.writeText(cmd);
+			copied = true;
+		} else {
+			copied = promptManualCopy(cmd);
+		}
+	} catch {
+		copied = promptManualCopy(cmd);
+	}
+
+	btn.textContent = copied ? "✓ COPIADO" : "COPIA MANUAL";
 	setTimeout(() => {
 		btn.innerHTML = "⌘ COPIAR";
 	}, 1500);

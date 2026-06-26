@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # ============================================================
-#  DeployCraft Installer - macOS v2.0.0
+#  DeployCraft Installer - macOS v3.0.0
 #  Soporta Intel (x86_64) y Apple Silicon (arm64)
 # ============================================================
 
-VERSION="2.0.0"
-TLAUNCHER_URL="https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/TLauncher.jar"
-SERVERS_DAT_URL="https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/servers.dat"
+VERSION="3.0.0"
+RELEASES_BASE="https://github.com/Freddyz5/deploycraft/releases/latest/download"
+TLAUNCHER_URL="$RELEASES_BASE/TLauncher.jar"
+SERVERS_DAT_URL="$RELEASES_BASE/servers.dat"
 INSTALL_DIR="$HOME/Applications/TLauncher"
 MC_DIR="$HOME/Library/Application Support/minecraft"
 LOG_FILE="$HOME/Desktop/deploycraft-install.log"
