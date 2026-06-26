@@ -1,457 +1,645 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minecraft Friends Installer</title>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Minecraft Friends Installer</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!-- NAV -->
+		<nav>
+			<div class="nav-logo">
+				<div class="grass-block">
+					<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+						<rect width="16" height="16" fill="#8B5E3C" />
+						<rect y="0" width="16" height="5" fill="#4CAF50" />
+						<rect x="0" y="0" width="16" height="1" fill="#5DBB63" />
+						<rect x="2" y="1" width="2" height="1" fill="#66BB6A" />
+						<rect x="7" y="1" width="3" height="1" fill="#66BB6A" />
+						<rect x="12" y="1" width="2" height="1" fill="#66BB6A" />
+						<rect x="4" y="2" width="2" height="1" fill="#5DBB63" />
+						<rect x="10" y="2" width="2" height="1" fill="#5DBB63" />
+						<rect x="1" y="3" width="1" height="1" fill="#81C784" />
+						<rect x="6" y="3" width="1" height="1" fill="#81C784" />
+						<rect x="13" y="3" width="1" height="1" fill="#81C784" />
+					</svg>
+				</div>
+				MC FRIENDS
+			</div>
+			<ul class="nav-links">
+				<li><a href="#que-hace">¿Qué hace?</a></li>
+				<li><a href="#instalar">Instalar</a></li>
+				<li><a href="#servidor">Servidor</a></li>
+				<li><a href="#cumple">Game Party</a></li>
+				<li><a href="#faq">FAQ</a></li>
+			</ul>
+		</nav>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <div class="grass-block">
-      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <rect width="16" height="16" fill="#8B5E3C"/>
-        <rect y="0" width="16" height="5" fill="#4CAF50"/>
-        <rect x="0" y="0" width="16" height="1" fill="#5DBB63"/>
-        <rect x="2" y="1" width="2" height="1" fill="#66BB6A"/>
-        <rect x="7" y="1" width="3" height="1" fill="#66BB6A"/>
-        <rect x="12" y="1" width="2" height="1" fill="#66BB6A"/>
-        <rect x="4" y="2" width="2" height="1" fill="#5DBB63"/>
-        <rect x="10" y="2" width="2" height="1" fill="#5DBB63"/>
-        <rect x="1" y="3" width="1" height="1" fill="#81C784"/>
-        <rect x="6" y="3" width="1" height="1" fill="#81C784"/>
-        <rect x="13" y="3" width="1" height="1" fill="#81C784"/>
-      </svg>
-    </div>
-    MC FRIENDS
-  </div>
-  <ul class="nav-links">
-    <li><a href="#que-hace">¿Qué hace?</a></li>
-    <li><a href="#instalar">Instalar</a></li>
-    <li><a href="#servidor">Servidor</a></li>
-    <li><a href="#cumple">Game Party</a></li>
-    <li><a href="#faq">FAQ</a></li>
-  </ul>
-</nav>
+		<!-- HERO -->
+		<div class="hero">
+			<div class="stars" id="stars"></div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="stars" id="stars"></div>
+			<div class="hero-eyebrow">
+				&#x2588; Proyecto privado &#x2022; Para amigos &#x2022; Open Source
+			</div>
 
-  <div class="hero-eyebrow">&#x2588; Proyecto privado &#x2022; Para amigos &#x2022; Open Source</div>
+			<h1 class="hero-title">
+				MINECRAFT<br />
+				<span class="accent">FRIENDS</span> <span class="gold">INSTALLER</span
+				><span class="cursor"></span>
+			</h1>
 
-  <h1 class="hero-title">
-    MINECRAFT<br>
-    <span class="accent">FRIENDS</span> <span class="gold">INSTALLER</span><span class="cursor"></span>
-  </h1>
+			<p class="hero-sub">
+				Un installer. Sin configurar nada. En minutos tienes Java, TLauncher y
+				el servidor favorito listos para jugar.
+			</p>
 
-  <p class="hero-sub">
-    Un installer. Sin configurar nada. En minutos tienes Java, TLauncher y el servidor favorito listos para jugar.
-  </p>
+			<!-- DOWNLOAD AREA — populated by JS -->
+			<div class="download-area" id="downloadArea">
+				<div class="os-detected" id="osDetected">Detectando tu sistema...</div>
+				<div id="downloadBtn"></div>
+				<div class="download-alts" id="downloadAlts"></div>
+			</div>
+		</div>
 
-  <!-- DOWNLOAD AREA — populated by JS -->
-  <div class="download-area" id="downloadArea">
-    <div class="os-detected" id="osDetected">Detectando tu sistema...</div>
-    <div id="downloadBtn"></div>
-    <div class="download-alts" id="downloadAlts"></div>
-  </div>
-</div>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-<!-- DIRT DIVIDER -->
-<div class="dirt-divider"></div>
+		<!-- QUE HACE -->
+		<section id="que-hace">
+			<div class="section-label reveal">&#x25B6; Características</div>
+			<h2 class="section-title reveal">Todo automático,<br />tú solo juega.</h2>
+			<p class="section-desc reveal">
+				Selecciona tu sistema operativo y el installer hace todo el trabajo por
+				ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando
+				cómo instalar Java.
+			</p>
 
-<!-- QUE HACE -->
-<section id="que-hace">
-  <div class="section-label reveal">&#x25B6; Características</div>
-  <h2 class="section-title reveal">Todo automático,<br>tú solo juega.</h2>
-  <p class="section-desc reveal">Selecciona tu sistema operativo y el installer hace todo el trabajo por ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando cómo instalar Java.</p>
+			<div class="features-grid reveal">
+				<div class="feature-card">
+					<span class="feature-icon">&#x2615;</span>
+					<div class="feature-title">Java automático</div>
+					<div class="feature-desc">
+						Detecta si tienes Java instalado y lo descarga si no. Sin buscar
+						versiones, sin configurar variables de entorno.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F3AE;</span>
+					<div class="feature-title">TLauncher incluido</div>
+					<div class="feature-desc">
+						Descarga e instala TLauncher automáticamente. Solo abre, crea tu
+						usuario y empieza a jugar.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F310;</span>
+					<div class="feature-title">Servidor preconfigurado</div>
+					<div class="feature-desc">
+						El servidor de los amigos ya viene cargado. No tienes que escribir
+						ninguna IP a mano.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F4BB;</span>
+					<div class="feature-title">Windows y macOS</div>
+					<div class="feature-desc">
+						PowerShell para Windows 10/11. Bash para Mac Intel y Apple Silicon
+						(M1, M2, M3...).
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F517;</span>
+					<div class="feature-title">Acceso directo</div>
+					<div class="feature-desc">
+						Crea un acceso directo en el escritorio para que abrir TLauncher sea
+						un doble clic.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F4CB;</span>
+					<div class="feature-title">Registro de errores</div>
+					<div class="feature-desc">
+						Si algo falla, guarda un log con el detalle. Compártelo por WhatsApp
+						y en minutos está resuelto.
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <div class="features-grid reveal">
-    <div class="feature-card">
-      <span class="feature-icon">&#x2615;</span>
-      <div class="feature-title">Java automático</div>
-      <div class="feature-desc">Detecta si tienes Java instalado y lo descarga si no. Sin buscar versiones, sin configurar variables de entorno.</div>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F3AE;</span>
-      <div class="feature-title">TLauncher incluido</div>
-      <div class="feature-desc">Descarga e instala TLauncher automáticamente. Solo abre, crea tu usuario y empieza a jugar.</div>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F310;</span>
-      <div class="feature-title">Servidor preconfigurado</div>
-      <div class="feature-desc">El servidor de los amigos ya viene cargado. No tienes que escribir ninguna IP a mano.</div>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F4BB;</span>
-      <div class="feature-title">Windows y macOS</div>
-      <div class="feature-desc">PowerShell para Windows 10/11. Bash para Mac Intel y Apple Silicon (M1, M2, M3...).</div>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F517;</span>
-      <div class="feature-title">Acceso directo</div>
-      <div class="feature-desc">Crea un acceso directo en el escritorio para que abrir TLauncher sea un doble clic.</div>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F4CB;</span>
-      <div class="feature-title">Registro de errores</div>
-      <div class="feature-desc">Si algo falla, guarda un log con el detalle. Compártelo por WhatsApp y en minutos está resuelto.</div>
-    </div>
-  </div>
-</section>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-<!-- DIRT DIVIDER -->
-<div class="dirt-divider"></div>
+		<!-- INSTALAR -->
+		<div class="steps-bg" id="instalar">
+			<section>
+				<div class="section-label reveal">&#x25B6; Instalación</div>
+				<h2 class="section-title reveal">¿Cómo se instala?</h2>
+				<p class="section-desc reveal">
+					Elige tu sistema operativo y sigue los pasos. En serio, son muy pocos.
+				</p>
 
-<!-- INSTALAR -->
-<div class="steps-bg" id="instalar">
-  <section>
-    <div class="section-label reveal">&#x25B6; Instalación</div>
-    <h2 class="section-title reveal">¿Cómo se instala?</h2>
-    <p class="section-desc reveal">Elige tu sistema operativo y sigue los pasos. En serio, son muy pocos.</p>
+				<div class="os-tabs reveal">
+					<button class="os-tab active" onclick="switchOS('win')">
+						&#x1F5A5; Windows
+					</button>
+					<button class="os-tab" onclick="switchOS('mac')">
+						&#xF8FF; macOS
+					</button>
+				</div>
 
-    <div class="os-tabs reveal">
-      <button class="os-tab active" onclick="switchOS('win')">&#x1F5A5; Windows</button>
-      <button class="os-tab" onclick="switchOS('mac')">&#xF8FF; macOS</button>
-    </div>
+				<div class="steps-grid">
+					<div class="step-list reveal">
+						<div class="step-item active" data-step="0" onclick="setStep(0)">
+							<div class="step-num">01</div>
+							<div class="step-body">
+								<div class="step-title">Descarga el instalador</div>
+								<div class="step-desc">
+									Ve a Releases en GitHub y descarga el archivo para tu sistema
+									operativo.
+								</div>
+							</div>
+						</div>
+						<div class="step-item" data-step="1" onclick="setStep(1)">
+							<div class="step-num">02</div>
+							<div class="step-body">
+								<div class="step-title" id="step2title">
+									Ejecuta como administrador
+								</div>
+								<div class="step-desc" id="step2desc">
+									Clic derecho en install.ps1 → "Ejecutar con PowerShell".
+									Acepta si te pide permisos.
+								</div>
+							</div>
+						</div>
+						<div class="step-item" data-step="2" onclick="setStep(2)">
+							<div class="step-num">03</div>
+							<div class="step-body">
+								<div class="step-title">Espera que termine</div>
+								<div class="step-desc">
+									El script instala Java, TLauncher y configura todo solo.
+									Demora 2–5 minutos dependiendo de tu internet.
+								</div>
+							</div>
+						</div>
+						<div class="step-item" data-step="3" onclick="setStep(3)">
+							<div class="step-num">04</div>
+							<div class="step-body">
+								<div class="step-title">Pon tu nick y juega</div>
+								<div class="step-desc">
+									TLauncher abre solo. Escribe tu nick, elige "Oficial 26.2" y
+									entra al servidor.
+								</div>
+							</div>
+						</div>
+					</div>
 
-    <div class="steps-grid">
-      <div class="step-list reveal">
-        <div class="step-item active" data-step="0" onclick="setStep(0)">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <div class="step-title">Descarga el instalador</div>
-            <div class="step-desc">Ve a Releases en GitHub y descarga el archivo para tu sistema operativo.</div>
-          </div>
-        </div>
-        <div class="step-item" data-step="1" onclick="setStep(1)">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <div class="step-title" id="step2title">Ejecuta como administrador</div>
-            <div class="step-desc" id="step2desc">Clic derecho en install.ps1 → "Ejecutar con PowerShell". Acepta si te pide permisos.</div>
-          </div>
-        </div>
-        <div class="step-item" data-step="2" onclick="setStep(2)">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <div class="step-title">Espera que termine</div>
-            <div class="step-desc">El script instala Java, TLauncher y configura todo solo. Demora 2–5 minutos dependiendo de tu internet.</div>
-          </div>
-        </div>
-        <div class="step-item" data-step="3" onclick="setStep(3)">
-          <div class="step-num">04</div>
-          <div class="step-body">
-            <div class="step-title">Pon tu nick y juega</div>
-            <div class="step-desc">TLauncher abre solo. Escribe tu nick, elige "Oficial 26.2" y entra al servidor.</div>
-          </div>
-        </div>
-      </div>
+					<div class="reveal">
+						<div class="terminal">
+							<div class="terminal-header">
+								<div class="dot dot-red"></div>
+								<div class="dot dot-yellow"></div>
+								<div class="dot dot-green"></div>
+								<span class="terminal-title" id="term-title"
+									>Windows PowerShell</span
+								>
+							</div>
+							<div class="terminal-body" id="term-body">
+								<div class="term-line">
+									<span class="term-ps">PS C:\Users\Tú&gt;</span
+									><span class="term-cmd">.\install.ps1</span>
+								</div>
+								<div class="term-output term-info">
+									[INFO] Detectando sistema operativo...
+								</div>
+								<div class="term-output term-ok">
+									[OK] Windows 11 detectado.
+								</div>
+								<div class="term-output term-info">
+									[INFO] Verificando Java...
+								</div>
+								<div class="term-output term-warn">
+									[WARN] Java no encontrado. Instalando...
+								</div>
+								<div class="term-output term-ok">
+									[OK] Java 21 instalado correctamente.
+								</div>
+								<div class="term-output term-info">
+									[INFO] Descargando TLauncher...
+								</div>
+								<div class="term-output term-ok">[OK] TLauncher instalado.</div>
+								<div class="term-output term-info">
+									[INFO] Configurando servidor favorito...
+								</div>
+								<div class="term-output term-ok">
+									[OK] Servidor agregado correctamente.
+								</div>
+								<div class="term-output term-info">
+									[INFO] Creando acceso directo...
+								</div>
+								<div class="term-output term-ok">
+									[OK] ¡Todo listo! Abriendo TLauncher...
+								</div>
+								<div class="term-line">
+									<span class="term-ps">PS C:\Users\Tú&gt;</span
+									><span class="term-cursor"></span>
+								</div>
+							</div>
+						</div>
 
-      <div class="reveal">
-        <div class="terminal">
-          <div class="terminal-header">
-            <div class="dot dot-red"></div>
-            <div class="dot dot-yellow"></div>
-            <div class="dot dot-green"></div>
-            <span class="terminal-title" id="term-title">Windows PowerShell</span>
-          </div>
-          <div class="terminal-body" id="term-body">
-            <div class="term-line"><span class="term-ps">PS C:\Users\Tú&gt;</span><span class="term-cmd">.\install.ps1</span></div>
-            <div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
-            <div class="term-output term-ok">[OK] Windows 11 detectado.</div>
-            <div class="term-output term-info">[INFO] Verificando Java...</div>
-            <div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
-            <div class="term-output term-ok">[OK] Java 21 instalado correctamente.</div>
-            <div class="term-output term-info">[INFO] Descargando TLauncher...</div>
-            <div class="term-output term-ok">[OK] TLauncher instalado.</div>
-            <div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
-            <div class="term-output term-ok">[OK] Servidor agregado correctamente.</div>
-            <div class="term-output term-info">[INFO] Creando acceso directo...</div>
-            <div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
-            <div class="term-line"><span class="term-ps">PS C:\Users\Tú&gt;</span><span class="term-cursor"></span></div>
-          </div>
-        </div>
+						<div class="one-liner">
+							<code id="one-liner-cmd"
+								>iwr -useb https://raw.githubusercontent.com/.../install.ps1 |
+								iex</code
+							>
+							<button class="copy-btn" onclick="copyCmd()">
+								&#x2398; COPIAR
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 
-        <div class="one-liner">
-          <code id="one-liner-cmd">iwr -useb https://raw.githubusercontent.com/.../install.ps1 | iex</code>
-          <button class="copy-btn" onclick="copyCmd()">&#x2398; COPIAR</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-<!-- REQUISITOS -->
-<section>
-  <div class="section-label reveal">&#x25B6; Requisitos</div>
-  <h2 class="section-title reveal">Lo que necesitas</h2>
-  <div class="req-grid reveal">
-    <div class="req-card">
-      <span class="req-icon">&#x1F4BE;</span>
-      <div>
-        <div class="req-label">Almacenamiento</div>
-        <div class="req-value">~500 MB libres</div>
-      </div>
-    </div>
-    <div class="req-card">
-      <span class="req-icon">&#x1F4CA;</span>
-      <div>
-        <div class="req-label">RAM mínima</div>
-        <div class="req-value">4 GB usables</div>
-      </div>
-    </div>
-    <div class="req-card">
-      <span class="req-icon">&#x1F4F6;</span>
-      <div>
-        <div class="req-label">Conexión</div>
-        <div class="req-value">Internet requerido</div>
-      </div>
-    </div>
-    <div class="req-card">
-      <span class="req-icon">&#x1F5A5;</span>
-      <div>
-        <div class="req-label">Windows</div>
-        <div class="req-value">10 / 11</div>
-      </div>
-    </div>
-    <div class="req-card">
-      <span class="req-icon">&#xF8FF;</span>
-      <div>
-        <div class="req-label">macOS</div>
-        <div class="req-value">Intel + Apple Silicon</div>
-      </div>
-    </div>
-    <div class="req-card">
-      <span class="req-icon">&#x2615;</span>
-      <div>
-        <div class="req-label">Java</div>
-        <div class="req-value">Lo instala solo</div>
-      </div>
-    </div>
-  </div>
-</section>
+		<!-- REQUISITOS -->
+		<section>
+			<div class="section-label reveal">&#x25B6; Requisitos</div>
+			<h2 class="section-title reveal">Lo que necesitas</h2>
+			<div class="req-grid reveal">
+				<div class="req-card">
+					<span class="req-icon">&#x1F4BE;</span>
+					<div>
+						<div class="req-label">Almacenamiento</div>
+						<div class="req-value">~500 MB libres</div>
+					</div>
+				</div>
+				<div class="req-card">
+					<span class="req-icon">&#x1F4CA;</span>
+					<div>
+						<div class="req-label">RAM mínima</div>
+						<div class="req-value">4 GB usables</div>
+					</div>
+				</div>
+				<div class="req-card">
+					<span class="req-icon">&#x1F4F6;</span>
+					<div>
+						<div class="req-label">Conexión</div>
+						<div class="req-value">Internet requerido</div>
+					</div>
+				</div>
+				<div class="req-card">
+					<span class="req-icon">&#x1F5A5;</span>
+					<div>
+						<div class="req-label">Windows</div>
+						<div class="req-value">10 / 11</div>
+					</div>
+				</div>
+				<div class="req-card">
+					<span class="req-icon">&#xF8FF;</span>
+					<div>
+						<div class="req-label">macOS</div>
+						<div class="req-value">Intel + Apple Silicon</div>
+					</div>
+				</div>
+				<div class="req-card">
+					<span class="req-icon">&#x2615;</span>
+					<div>
+						<div class="req-label">Java</div>
+						<div class="req-value">Lo instala solo</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-<!-- DIRT DIVIDER -->
-<div class="dirt-divider"></div>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-<!-- SERVIDOR -->
-<section id="servidor">
-  <div class="section-label reveal">&#x25B6; El servidor</div>
-  <h2 class="section-title reveal">¿A dónde nos conectamos?</h2>
-  <p class="section-desc reveal">
-    El instalador ya configura el servidor automáticamente. Pero si necesitas conectarte a mano, acá están los datos.
-  </p>
+		<!-- SERVIDOR -->
+		<section id="servidor">
+			<div class="section-label reveal">&#x25B6; El servidor</div>
+			<h2 class="section-title reveal">¿A dónde nos conectamos?</h2>
+			<p class="section-desc reveal">
+				El instalador ya configura el servidor automáticamente. Pero si
+				necesitas conectarte a mano, acá están los datos.
+			</p>
 
-  <div class="server-card reveal">
-    <div>
-      <div class="server-label">Estado</div>
-      <div class="server-value"><span class="status-dot"></span>ONLINE</div>
-    </div>
-    <div>
-      <div class="server-label">Host</div>
-      <div class="server-value">deploycraft.falix.dev</div>
-    </div>
-    <div>
-      <div class="server-label">IP directa</div>
-      <div class="server-value">144.76.72.157:21399</div>
-    </div>
-    <div>
-      <div class="server-label">Versión</div>
-      <div class="server-value">Oficial 26.2</div>
-    </div>
-    <div>
-      <div class="server-label">Modo</div>
-      <div class="server-value">Survival</div>
-    </div>
-  </div>
-</section>
+			<div class="server-card reveal">
+				<div>
+					<div class="server-label">Estado</div>
+					<div class="server-value"><span class="status-dot"></span>ONLINE</div>
+				</div>
+				<div>
+					<div class="server-label">Host</div>
+					<div class="server-value">deploycraft.falix.dev</div>
+				</div>
+				<div>
+					<div class="server-label">IP directa</div>
+					<div class="server-value">144.76.72.157:21399</div>
+				</div>
+				<div>
+					<div class="server-label">Versión</div>
+					<div class="server-value">Oficial 26.2</div>
+				</div>
+				<div>
+					<div class="server-label">Modo</div>
+					<div class="server-value">Survival</div>
+				</div>
+			</div>
+		</section>
 
-<!-- FAQ -->
-<div class="steps-bg" id="faq">
-  <section>
-    <div class="section-label reveal">&#x25B6; Preguntas frecuentes</div>
-    <h2 class="section-title reveal">¿Algo no funcionó?</h2>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-    <div class="faq-list reveal">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          El antivirus bloqueó el instalador en Windows ¿es seguro?
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          Sí, es seguro. Windows Defender a veces marca scripts descargados sin analizarlos. Clic derecho en el archivo → Propiedades → marca "Desbloquear" y acepta. También puedes revisar el código completo en GitHub.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          En Mac aparece "no se puede abrir porque el desarrollador es desconocido"
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          Es el Gatekeeper de macOS. Ve a Preferencias del Sistema → Privacidad y Seguridad → "Abrir de todas formas". Solo se pide una vez.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿TLauncher es legal y gratuito?
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          TLauncher es un launcher no oficial que permite jugar de forma gratuita. No está vinculado a Mojang/Microsoft. Úsalo bajo tu responsabilidad; si tienes una cuenta oficial, te recomendamos el launcher oficial de Minecraft.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Qué pasa si ya tengo Java instalado?
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          El installer lo detecta y salta ese paso. Si tu versión es incompatible, instala la correcta sin tocar la tuya.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          El servidor no aparece en TLauncher después de instalar
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor manualmente con la IP de arriba. Si el problema persiste, comparte el archivo <code>install-log.txt</code> con nosotros.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Cuánta RAM asigno a Minecraft?
-          <span class="faq-arrow">&#x25BA;</span>
-        </button>
-        <div class="faq-a">
-          En TLauncher, ve a Configuración → JVM Arguments y ajusta <code>-Xmx</code>. Para juego fluido recomendamos 2–3 GB si tienes 8 GB de RAM en total. No asignes más del 50–60% de tu RAM total.
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════
+		<!-- ═══════════════════════════════════════════════════════════
      BIRTHDAY SECTION
 ════════════════════════════════════════════════════════════ -->
-<div class="birthday-section" id="cumple">
-  <!-- Floating decoration -->
-  <div class="cake-float" style="left:8%;animation-delay:0s;animation-duration:14s">🎂</div>
-  <div class="cake-float" style="left:25%;animation-delay:3s;animation-duration:11s">⭐</div>
-  <div class="cake-float" style="left:60%;animation-delay:6s;animation-duration:16s">🎂</div>
-  <div class="cake-float" style="left:80%;animation-delay:1.5s;animation-duration:13s">⭐</div>
-  <div class="cake-float" style="left:45%;animation-delay:8s;animation-duration:10s">🎮</div>
+		<div class="birthday-section" id="cumple">
+			<!-- Floating decoration -->
+			<div
+				class="cake-float"
+				style="left: 8%; animation-delay: 0s; animation-duration: 14s">
+				🎂
+			</div>
+			<div
+				class="cake-float"
+				style="left: 25%; animation-delay: 3s; animation-duration: 11s">
+				⭐
+			</div>
+			<div
+				class="cake-float"
+				style="left: 60%; animation-delay: 6s; animation-duration: 16s">
+				🎂
+			</div>
+			<div
+				class="cake-float"
+				style="left: 80%; animation-delay: 1.5s; animation-duration: 13s">
+				⭐
+			</div>
+			<div
+				class="cake-float"
+				style="left: 45%; animation-delay: 8s; animation-duration: 10s">
+				🎮
+			</div>
 
-  <div class="birthday-inner">
+			<div class="birthday-inner">
+				<!-- LEFT: Explanation -->
+				<div>
+					<div class="birthday-label reveal">&#x25B6; Game Party</div>
+					<h2 class="birthday-title reveal">
+						¿Quieres hacer<br />lo mismo para tu
+						<span class="gold">cumple</span>?
+					</h2>
+					<p class="birthday-desc reveal">
+						Esto nació como un regalo de cumpleaños — volver a jugar juntos como
+						antes. Si quieres hacer lo mismo para el tuyo, regístralo acá y te
+						avisamos cuando se acerque la fecha para organizar la party.
+					</p>
 
-    <!-- LEFT: Explanation -->
-    <div>
-      <div class="birthday-label reveal">&#x25B6; Game Party</div>
-      <h2 class="birthday-title reveal">¿Quieres hacer<br>lo mismo para tu <span class="gold">cumple</span>?</h2>
-      <p class="birthday-desc reveal">
-        Esto nació como un regalo de cumpleaños — volver a jugar juntos como antes.
-        Si quieres hacer lo mismo para el tuyo, regístralo acá y te avisamos cuando se acerque la fecha para organizar la party.
-      </p>
+					<div class="birthday-steps reveal">
+						<div class="bday-step">
+							<div class="bday-step-num">1</div>
+							<div class="bday-step-text">
+								<strong>Pones tu nombre y fecha de cumpleaños</strong> en el
+								formulario.
+							</div>
+						</div>
+						<div class="bday-step">
+							<div class="bday-step-num">2</div>
+							<div class="bday-step-text">
+								<strong>Te llegará un recordatorio</strong> unos días antes para
+								coordinar la game party.
+							</div>
+						</div>
+						<div class="bday-step">
+							<div class="bday-step-num">3</div>
+							<div class="bday-step-text">
+								<strong>Confirmas el día</strong> que más te convenga y se
+								agenda para todos.
+							</div>
+						</div>
+					</div>
+				</div>
 
-      <div class="birthday-steps reveal">
-        <div class="bday-step">
-          <div class="bday-step-num">1</div>
-          <div class="bday-step-text"><strong>Pones tu nombre y fecha de cumpleaños</strong> en el formulario.</div>
-        </div>
-        <div class="bday-step">
-          <div class="bday-step-num">2</div>
-          <div class="bday-step-text"><strong>Te llegará un recordatorio</strong> unos días antes para coordinar la game party.</div>
-        </div>
-        <div class="bday-step">
-          <div class="bday-step-num">3</div>
-          <div class="bday-step-text"><strong>Confirmas el día</strong> que más te convenga y se agenda para todos.</div>
-        </div>
-      </div>
-    </div>
+				<!-- RIGHT: Form -->
+				<div class="reveal">
+					<div class="bday-form-wrap">
+						<div class="form-title">&#x1F382; REGISTRA TU CUMPLE</div>
+						<div class="form-subtitle">
+							Solo para el grupo — no se comparte con nadie más.
+						</div>
 
-    <!-- RIGHT: Form -->
-    <div class="reveal">
-      <div class="bday-form-wrap">
-        <div class="form-title">&#x1F382; REGISTRA TU CUMPLE</div>
-        <div class="form-subtitle">Solo para el grupo — no se comparte con nadie más.</div>
+						<!-- Form fields -->
+						<div id="formFields">
+							<div class="form-field">
+								<label class="form-label" for="bdName">Tu nombre</label>
+								<input
+									class="form-input"
+									type="text"
+									id="bdName"
+									placeholder="Como te conocemos"
+									maxlength="60"
+									autocomplete="given-name" />
+							</div>
 
-        <!-- Form fields -->
-        <div id="formFields">
-          <div class="form-field">
-            <label class="form-label" for="bdName">Tu nombre</label>
-            <input class="form-input" type="text" id="bdName" placeholder="Como te conocemos" maxlength="60" autocomplete="given-name">
-          </div>
+							<div class="form-field">
+								<label class="form-label" for="bdDate"
+									>Fecha de cumpleaños</label
+								>
+								<input
+									class="form-input"
+									type="date"
+									id="bdDate"
+									autocomplete="bday" />
+								<div class="form-hint">
+									Solo usamos el día y el mes, el año es opcional.
+								</div>
+							</div>
 
-          <div class="form-field">
-            <label class="form-label" for="bdDate">Fecha de cumpleaños</label>
-            <input class="form-input" type="date" id="bdDate" autocomplete="bday">
-            <div class="form-hint">Solo usamos el día y el mes, el año es opcional.</div>
-          </div>
+							<div class="form-field">
+								<label class="form-label" for="bdContact"
+									>WhatsApp o email
+									<span
+										style="
+											font-weight: 400;
+											text-transform: none;
+											letter-spacing: 0;
+										"
+										>(opcional)</span
+									></label
+								>
+								<input
+									class="form-input"
+									type="text"
+									id="bdContact"
+									placeholder="Para el recordatorio"
+									maxlength="120"
+									autocomplete="off" />
+							</div>
 
-          <div class="form-field">
-            <label class="form-label" for="bdContact">WhatsApp o email <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
-            <input class="form-input" type="text" id="bdContact" placeholder="Para el recordatorio" maxlength="120" autocomplete="off">
-          </div>
+							<button
+								class="form-submit"
+								id="bdSubmit"
+								onclick="submitBirthday()">
+								&#x25BA; GUARDAR MI CUMPLE
+							</button>
 
-          <button class="form-submit" id="bdSubmit" onclick="submitBirthday()">
-            &#x25BA; GUARDAR MI CUMPLE
-          </button>
+							<div class="privacy-note">
+								&#x1F512; Solo los amigos vemos estos datos. Nunca se comparten
+								con terceros.
+							</div>
+						</div>
 
-          <div class="privacy-note">
-            &#x1F512; Solo los amigos vemos estos datos. Nunca se comparten con terceros.
-          </div>
-        </div>
+						<!-- Success state -->
+						<div class="form-state state-success" id="stateSuccess">
+							<div class="state-icon">&#x2713;</div>
+							<div class="state-title">¡Registrado!</div>
+							<div class="state-desc">
+								Te avisamos cuando se acerque tu cumple para organizar la party.
+								&#x1F3AE;
+							</div>
+						</div>
 
-        <!-- Success state -->
-        <div class="form-state state-success" id="stateSuccess">
-          <div class="state-icon">&#x2713;</div>
-          <div class="state-title">¡Registrado!</div>
-          <div class="state-desc">Te avisamos cuando se acerque tu cumple para organizar la party. &#x1F3AE;</div>
-        </div>
+						<!-- Error state -->
+						<div class="form-state state-error" id="stateError">
+							<div class="state-icon">&#x2717;</div>
+							<div class="state-title">Algo falló</div>
+							<div class="state-desc" id="errorDesc">
+								No se pudo guardar. Intenta de nuevo.
+							</div>
+							<button class="retry-btn" onclick="resetForm()">
+								&#x21BA; Intentar de nuevo
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Error state -->
-        <div class="form-state state-error" id="stateError">
-          <div class="state-icon">&#x2717;</div>
-          <div class="state-title">Algo falló</div>
-          <div class="state-desc" id="errorDesc">No se pudo guardar. Intenta de nuevo.</div>
-          <button class="retry-btn" onclick="resetForm()">&#x21BA; Intentar de nuevo</button>
-        </div>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-      </div>
-    </div>
+		<!-- FAQ -->
+		<div class="steps-bg" id="faq">
+			<section>
+				<div class="section-label reveal">&#x25B6; Preguntas frecuentes</div>
+				<h2 class="section-title reveal">¿Algo no funcionó?</h2>
 
-  </div>
-</div>
+				<div class="faq-list reveal">
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							El antivirus bloqueó el instalador en Windows ¿es seguro?
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							Sí, es seguro. Windows Defender a veces marca scripts descargados
+							sin analizarlos. Clic derecho en el archivo → Propiedades → marca
+							"Desbloquear" y acepta. También puedes revisar el código completo
+							en GitHub.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							En Mac aparece "no se puede abrir porque el desarrollador es
+							desconocido"
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							Es el Gatekeeper de macOS. Ve a Preferencias del Sistema →
+							Privacidad y Seguridad → "Abrir de todas formas". Solo se pide una
+							vez.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							¿TLauncher es legal y gratuito?
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							TLauncher es un launcher no oficial que permite jugar de forma
+							gratuita. No está vinculado a Mojang/Microsoft. Úsalo bajo tu
+							responsabilidad; si tienes una cuenta oficial, te recomendamos el
+							launcher oficial de Minecraft.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							¿Qué pasa si ya tengo Java instalado?
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							El installer lo detecta y salta ese paso. Si tu versión es
+							incompatible, instala la correcta sin tocar la tuya.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							El servidor no aparece en TLauncher después de instalar
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor
+							manualmente con la IP de arriba. Si el problema persiste, comparte
+							el archivo <code>install-log.txt</code> con nosotros.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							¿Cuánta RAM asigno a Minecraft?
+							<span class="faq-arrow">&#x25BA;</span>
+						</button>
+						<div class="faq-a">
+							En TLauncher, ve a Configuración → JVM Arguments y ajusta
+							<code>-Xmx</code>. Para juego fluido recomendamos 2–3 GB si tienes
+							8 GB de RAM en total. No asignes más del 50–60% de tu RAM total.
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">&#x2588;&#x2588; MC FRIENDS INSTALLER &#x2588;&#x2588;</div>
-  <div class="footer-sub">Hecho con amor (y muchos bloques) para jugar juntos &#x2764;</div>
-  <div class="footer-links">
-    <a href="#">GitHub</a>
-    <a href="#">Releases</a>
-    <a href="#">Reportar error</a>
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted);">MIT License &mdash; Proyecto privado entre amigos &mdash; No afiliado a Mojang ni Microsoft</div>
-</footer>
+		<!-- DIRT DIVIDER -->
+		<div class="dirt-divider"></div>
 
-<script>
-// ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
-const RELEASES_BASE = 'https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0';
+		<!-- FOOTER -->
+		<footer>
+			<div class="footer-logo">
+				&#x2588;&#x2588; MC FRIENDS INSTALLER &#x2588;&#x2588;
+			</div>
+			<div class="footer-sub">
+				Hecho con amor (y muchos bloques) para jugar juntos &#x2764;
+			</div>
+			<div class="footer-links">
+				<a href="#">GitHub</a>
+				<a href="#">Releases</a>
+				<a href="#">Reportar error</a>
+			</div>
+			<div style="font-size: 0.75rem; color: var(--text-muted)">
+				MIT License &mdash; Proyecto privado entre amigos &mdash; No afiliado a
+				Mojang ni Microsoft
+			</div>
+		</footer>
 
-const osConfig = {
-  win: {
-    label: 'Windows detectado',
-    btnText: '&#x25BA; DESCARGAR PARA WINDOWS',
-    file: 'install.bat',
-    altText: '¿Usas Mac? <a onclick="triggerDownload(\'mac\')">Descarga para macOS</a>',
-    termTitle: 'Windows — CMD',
-    termBody: `<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cmd">install.bat</span></div>
+		<script>
+			// ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
+			const RELEASES_BASE =
+				"https://github.com/Freddyz5/deploycraft/releases/download/v3.0.0";
+
+			const osConfig = {
+				win: {
+					label: "Windows detectado",
+					btnText: "&#x25BA; DESCARGAR PARA WINDOWS",
+					file: "install.bat",
+					altText:
+						"¿Usas Mac? <a onclick=\"triggerDownload('mac')\">Descarga para macOS</a>",
+					termTitle: "Windows — CMD",
+					termBody: `<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cmd">install.bat</span></div>
 <div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
 <div class="term-output term-ok">[OK] Windows 11 detectado.</div>
 <div class="term-output term-info">[INFO] Verificando Java...</div>
@@ -463,17 +651,19 @@ const osConfig = {
 <div class="term-output term-ok">[OK] Servidor DeployCraft preconfigurado.</div>
 <div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
 <div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
-    step2title: 'Doble clic en install.bat',
-    step2desc: 'Si Windows Defender pregunta, click en "Más información" → "Ejecutar de todas formas".',
-    cmd: `${RELEASES_BASE}/install.bat`
-  },
-  mac: {
-    label: 'macOS detectado',
-    btnText: '&#x25BA; DESCARGAR PARA MAC',
-    file: 'install.command',
-    altText: '¿Usas Windows? <a onclick="triggerDownload(\'win\')">Descarga para Windows</a>',
-    termTitle: 'macOS — Terminal',
-    termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./install.command</span></div>
+					step2title: "Doble clic en install.bat",
+					step2desc:
+						'Si Windows Defender pregunta, click en "Más información" → "Ejecutar de todas formas".',
+					cmd: `${RELEASES_BASE}/install.bat`,
+				},
+				mac: {
+					label: "macOS detectado",
+					btnText: "&#x25BA; DESCARGAR PARA MAC",
+					file: "install.command",
+					altText:
+						"¿Usas Windows? <a onclick=\"triggerDownload('win')\">Descarga para Windows</a>",
+					termTitle: "macOS — Terminal",
+					termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./install.command</span></div>
 <div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
 <div class="term-output term-ok">[OK] macOS Apple Silicon (M2) detectado.</div>
 <div class="term-output term-info">[INFO] Verificando Java...</div>
@@ -485,267 +675,204 @@ const osConfig = {
 <div class="term-output term-ok">[OK] servers.dat instalado.</div>
 <div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
 <div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
-    step2title: 'Doble clic en install.command',
-    step2desc: 'Si macOS bloquea el archivo, ve a Preferencias → Privacidad y Seguridad → "Abrir de todas formas".',
-    cmd: `${RELEASES_BASE}/install.command`
-  },
-  unknown: {
-    label: 'Sistema no detectado',
-    btnText: '&#x25BA; VER DESCARGAS',
-    file: null,
-    altText: '<a href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">Ver todos los instaladores en GitHub</a>',
-    termTitle: 'Terminal',
-    termBody: '',
-    step2title: 'Ejecuta el installer',
-    step2desc: 'Sigue las instrucciones para tu sistema operativo.',
-    cmd: 'https://github.com/Freddyz5/deploycraft/releases'
-  }
-};
+					step2title: "Doble clic en install.command",
+					step2desc:
+						'Si macOS bloquea el archivo, ve a Preferencias → Privacidad y Seguridad → "Abrir de todas formas".',
+					cmd: `${RELEASES_BASE}/install.command`,
+				},
+				unknown: {
+					label: "Sistema no detectado",
+					btnText: "&#x25BA; VER DESCARGAS",
+					file: null,
+					altText:
+						'<a href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">Ver todos los instaladores en GitHub</a>',
+					termTitle: "Terminal",
+					termBody: "",
+					step2title: "Ejecuta el installer",
+					step2desc: "Sigue las instrucciones para tu sistema operativo.",
+					cmd: "https://github.com/Freddyz5/deploycraft/releases",
+				},
+			};
 
-function detectOS() {
-  const ua = navigator.userAgent;
-  if (/Windows/i.test(ua)) return 'win';
-  if (/Mac/i.test(ua)) return 'mac';
-  return 'unknown';
-}
+			function detectOS() {
+				const ua = navigator.userAgent;
+				if (/Windows/i.test(ua)) return "win";
+				if (/Mac/i.test(ua)) return "mac";
+				return "unknown";
+			}
 
-let currentOS = detectOS();
+			let currentOS = detectOS();
 
-function triggerDownload(os) {
-  const cfg = osConfig[os];
-  if (!cfg.file) { window.open('https://github.com/Freddyz5/deploycraft/releases', '_blank'); return; }
-  const a = document.createElement('a');
-  a.href = `${RELEASES_BASE}/${cfg.file}`;
-  a.download = cfg.file;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
+			function triggerDownload(os) {
+				const cfg = osConfig[os];
+				if (!cfg.file) {
+					window.open(
+						"https://github.com/Freddyz5/deploycraft/releases",
+						"_blank",
+					);
+					return;
+				}
+				const a = document.createElement("a");
+				a.href = `${RELEASES_BASE}/${cfg.file}`;
+				a.download = cfg.file;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+			}
 
-function renderDownloadArea() {
-  const cfg = osConfig[currentOS];
-  document.getElementById('osDetected').innerHTML = `Sistema detectado: <span>${cfg.label}</span>`;
+			function renderDownloadArea() {
+				const cfg = osConfig[currentOS];
+				document.getElementById("osDetected").innerHTML =
+					`Sistema detectado: <span>${cfg.label}</span>`;
 
-  const btn = document.getElementById('downloadBtn');
-  if (cfg.file) {
-    btn.innerHTML = `<button class="btn btn-primary" onclick="triggerDownload('${currentOS}')">${cfg.btnText}</button>`;
-  } else {
-    btn.innerHTML = `<a class="btn btn-primary" href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">${cfg.btnText}</a>`;
-  }
+				const btn = document.getElementById("downloadBtn");
+				if (cfg.file) {
+					btn.innerHTML = `<button class="btn btn-primary" onclick="triggerDownload('${currentOS}')">${cfg.btnText}</button>`;
+				} else {
+					btn.innerHTML = `<a class="btn btn-primary" href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">${cfg.btnText}</a>`;
+				}
 
-  document.getElementById('downloadAlts').innerHTML = cfg.altText;
-}
+				document.getElementById("downloadAlts").innerHTML = cfg.altText;
+			}
 
-renderDownloadArea();
+			renderDownloadArea();
 
-// ─── STEPS / TERMINAL ────────────────────────────────────────
-function switchOS(os) {
-  currentOS = os;
-  document.querySelectorAll('.os-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i === 0 && os === 'win') || (i === 1 && os === 'mac'));
-  });
-  const cfg = osConfig[os];
-  document.getElementById('term-title').textContent = cfg.termTitle;
-  document.getElementById('term-body').innerHTML = cfg.termBody;
-  document.getElementById('step2title').textContent = cfg.step2title;
-  document.getElementById('step2desc').textContent = cfg.step2desc;
-  document.getElementById('one-liner-cmd').textContent = cfg.cmd;
-  renderDownloadArea();
-  setStep(0);
-}
+			// ─── STEPS / TERMINAL ────────────────────────────────────────
+			function switchOS(os) {
+				currentOS = os;
+				document.querySelectorAll(".os-tab").forEach((t, i) => {
+					t.classList.toggle(
+						"active",
+						(i === 0 && os === "win") || (i === 1 && os === "mac"),
+					);
+				});
+				const cfg = osConfig[os];
+				document.getElementById("term-title").textContent = cfg.termTitle;
+				document.getElementById("term-body").innerHTML = cfg.termBody;
+				document.getElementById("step2title").textContent = cfg.step2title;
+				document.getElementById("step2desc").textContent = cfg.step2desc;
+				document.getElementById("one-liner-cmd").textContent = cfg.cmd;
+				renderDownloadArea();
+				setStep(0);
+			}
 
-function setStep(idx) {
-  document.querySelectorAll('.step-item').forEach((el, i) => el.classList.toggle('active', i === idx));
-}
+			function setStep(idx) {
+				document
+					.querySelectorAll(".step-item")
+					.forEach((el, i) => el.classList.toggle("active", i === idx));
+			}
 
-function copyCmd() {
-  const cmd = document.getElementById('one-liner-cmd').textContent;
-  navigator.clipboard.writeText(cmd).catch(() => {});
-  const btn = document.querySelector('.copy-btn');
-  btn.textContent = '✓ COPIADO';
-  setTimeout(() => { btn.innerHTML = '⌘ COPIAR'; }, 1500);
-}
+			function copyCmd() {
+				const cmd = document.getElementById("one-liner-cmd").textContent;
+				navigator.clipboard.writeText(cmd).catch(() => {});
+				const btn = document.querySelector(".copy-btn");
+				btn.textContent = "✓ COPIADO";
+				setTimeout(() => {
+					btn.innerHTML = "⌘ COPIAR";
+				}, 1500);
+			}
 
-// ─── FAQ ─────────────────────────────────────────────────────
-function toggleFaq(btn) {
-  const item = btn.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
+			// ─── FAQ ─────────────────────────────────────────────────────
+			function toggleFaq(btn) {
+				const item = btn.parentElement;
+				const wasOpen = item.classList.contains("open");
+				document
+					.querySelectorAll(".faq-item")
+					.forEach((i) => i.classList.remove("open"));
+				if (!wasOpen) item.classList.add("open");
+			}
 
-// ─── BIRTHDAY FORM ───────────────────────────────────────────
-// TODO: reemplazar esta URL con el endpoint real de Hono cuando esté deployado
-const API_URL = 'https://your-worker.workers.dev/birthday';
+			// ─── BIRTHDAY FORM ───────────────────────────────────────────
+			// TODO: reemplazar esta URL con el endpoint real de Hono cuando esté deployado
+			const API_URL = "https://your-worker.workers.dev/birthday";
 
-async function submitBirthday() {
-  const name    = document.getElementById('bdName').value.trim();
-  const date    = document.getElementById('bdDate').value;
-  const contact = document.getElementById('bdContact').value.trim();
+			async function submitBirthday() {
+				const name = document.getElementById("bdName").value.trim();
+				const date = document.getElementById("bdDate").value;
+				const contact = document.getElementById("bdContact").value.trim();
 
-  if (!name) { alert('Pon tu nombre para poder avisarte 🙂'); document.getElementById('bdName').focus(); return; }
-  if (!date) { alert('Pon tu fecha de cumpleaños'); document.getElementById('bdDate').focus(); return; }
+				if (!name) {
+					alert("Pon tu nombre para poder avisarte 🙂");
+					document.getElementById("bdName").focus();
+					return;
+				}
+				if (!date) {
+					alert("Pon tu fecha de cumpleaños");
+					document.getElementById("bdDate").focus();
+					return;
+				}
 
-  const btn = document.getElementById('bdSubmit');
-  btn.disabled = true;
-  btn.innerHTML = '&#x25BA; GUARDANDO...';
+				const btn = document.getElementById("bdSubmit");
+				btn.disabled = true;
+				btn.innerHTML = "&#x25BA; GUARDANDO...";
 
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, birthdate: date, contact })
-    });
+				try {
+					const res = await fetch(API_URL, {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ name, birthdate: date, contact }),
+					});
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+					if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    showState('success');
-  } catch (err) {
-    console.error(err);
-    // Mientras no hay backend, simulamos éxito para no bloquear la UI
-    // Quitar esta línea cuando el endpoint esté activo:
-    showState('success');
-    // Descomentar esto cuando el endpoint esté activo:
-    // document.getElementById('errorDesc').textContent = 'No se pudo conectar al servidor. Intenta más tarde.';
-    // showState('error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '&#x25BA; GUARDAR MI CUMPLE';
-  }
-}
+					showState("success");
+				} catch (err) {
+					console.error(err);
+					// Mientras no hay backend, simulamos éxito para no bloquear la UI
+					// Quitar esta línea cuando el endpoint esté activo:
+					showState("success");
+					// Descomentar esto cuando el endpoint esté activo:
+					// document.getElementById('errorDesc').textContent = 'No se pudo conectar al servidor. Intenta más tarde.';
+					// showState('error');
+				} finally {
+					btn.disabled = false;
+					btn.innerHTML = "&#x25BA; GUARDAR MI CUMPLE";
+				}
+			}
 
-function showState(state) {
-  document.getElementById('formFields').style.display = 'none';
-  if (state === 'success') {
-    document.getElementById('stateSuccess').classList.add('visible');
-  } else {
-    document.getElementById('stateError').classList.add('visible');
-  }
-}
+			function showState(state) {
+				document.getElementById("formFields").style.display = "none";
+				if (state === "success") {
+					document.getElementById("stateSuccess").classList.add("visible");
+				} else {
+					document.getElementById("stateError").classList.add("visible");
+				}
+			}
 
-function resetForm() {
-  document.getElementById('formFields').style.display = 'block';
-  document.getElementById('stateError').classList.remove('visible');
-  document.getElementById('stateSuccess').classList.remove('visible');
-}
+			function resetForm() {
+				document.getElementById("formFields").style.display = "block";
+				document.getElementById("stateError").classList.remove("visible");
+				document.getElementById("stateSuccess").classList.remove("visible");
+			}
 
-// ─── STARS ───────────────────────────────────────────────────
-const starsEl = document.getElementById('stars');
-for (let i = 0; i < 80; i++) {
-  const s = document.createElement('div');
-  s.className = 'star';
-  s.style.left = Math.random() * 100 + '%';
-  s.style.top = Math.random() * 100 + '%';
-  s.style.animationDelay = Math.random() * 3 + 's';
-  s.style.animationDuration = (2 + Math.random() * 3) + 's';
-  if (Math.random() > 0.7) { s.style.width = '4px'; s.style.height = '4px'; }
-  starsEl.appendChild(s);
-}
+			// ─── STARS ───────────────────────────────────────────────────
+			const starsEl = document.getElementById("stars");
+			for (let i = 0; i < 80; i++) {
+				const s = document.createElement("div");
+				s.className = "star";
+				s.style.left = Math.random() * 100 + "%";
+				s.style.top = Math.random() * 100 + "%";
+				s.style.animationDelay = Math.random() * 3 + "s";
+				s.style.animationDuration = 2 + Math.random() * 3 + "s";
+				if (Math.random() > 0.7) {
+					s.style.width = "4px";
+					s.style.height = "4px";
+				}
+				starsEl.appendChild(s);
+			}
 
-// ─── SCROLL REVEAL ───────────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-<!-- <script>
-const osData = {
-  win: {
-    step2title: 'Ejecuta como administrador',
-    step2desc: 'Clic derecho en install.ps1 → "Ejecutar con PowerShell". Acepta si te pide permisos.',
-    termTitle: 'Windows PowerShell',
-    termBody: `<div class="term-line"><span class="term-ps">PS C:\\Users\\Tú&gt;</span><span class="term-cmd">.\\install.ps1</span></div>
-<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
-<div class="term-output term-ok">[OK] Windows 11 detectado.</div>
-<div class="term-output term-info">[INFO] Verificando Java...</div>
-<div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
-<div class="term-output term-ok">[OK] Java 21 instalado correctamente.</div>
-<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
-<div class="term-output term-ok">[OK] TLauncher instalado.</div>
-<div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
-<div class="term-output term-ok">[OK] Servidor agregado correctamente.</div>
-<div class="term-output term-info">[INFO] Creando acceso directo...</div>
-<div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
-<div class="term-line"><span class="term-ps">PS C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
-    cmd: 'iwr -useb https://raw.githubusercontent.com/.../install.ps1 | iex'
-  },
-  mac: {
-    step2title: 'Dale permisos de ejecución',
-    step2desc: 'En Terminal: chmod +x install.sh && ./install.sh — si Gatekeeper bloquea, ve a Privacidad y Seguridad.',
-    termTitle: 'macOS Terminal — zsh',
-    termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">chmod +x install.sh && ./install.sh</span></div>
-<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
-<div class="term-output term-ok">[OK] macOS Apple Silicon (M2) detectado.</div>
-<div class="term-output term-info">[INFO] Verificando Java...</div>
-<div class="term-output term-warn">[WARN] Java no encontrado. Instalando (arm64)...</div>
-<div class="term-output term-ok">[OK] Java 21 Temurin instalado correctamente.</div>
-<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
-<div class="term-output term-ok">[OK] TLauncher.jar descargado.</div>
-<div class="term-output term-info">[INFO] Configurando servidor favorito...</div>
-<div class="term-output term-ok">[OK] Servidor agregado en servers.dat.</div>
-<div class="term-output term-info">[INFO] Creando alias en el Dock...</div>
-<div class="term-output term-ok">[OK] ¡Todo listo! Abriendo TLauncher...</div>
-<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
-    cmd: 'curl -fsSL https://raw.githubusercontent.com/.../install.sh | bash'
-  }
-};
-
-let currentOS = 'win';
-
-function switchOS(os) {
-  currentOS = os;
-  document.querySelectorAll('.os-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i === 0 && os === 'win') || (i === 1 && os === 'mac'));
-  });
-  const d = osData[os];
-  document.getElementById('step2title').textContent = d.step2title;
-  document.getElementById('step2desc').textContent = d.step2desc;
-  document.getElementById('term-title').textContent = d.termTitle;
-  document.getElementById('term-body').innerHTML = d.termBody;
-  document.getElementById('one-liner-cmd').textContent = d.cmd;
-  setStep(0);
-}
-
-function setStep(idx) {
-  document.querySelectorAll('.step-item').forEach((el, i) => {
-    el.classList.toggle('active', i === idx);
-  });
-}
-
-function toggleFaq(btn) {
-  const item = btn.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
-
-function copyCmd() {
-  const cmd = document.getElementById('one-liner-cmd').textContent;
-  navigator.clipboard.writeText(cmd).catch(() => {});
-  const btn = document.querySelector('.copy-btn');
-  btn.textContent = '✓ COPIADO';
-  setTimeout(() => { btn.textContent = '⌘ COPIAR'; }, 1500);
-}
-
-// Stars
-const starsEl = document.getElementById('stars');
-for (let i = 0; i < 80; i++) {
-  const s = document.createElement('div');
-  s.className = 'star';
-  s.style.left = Math.random() * 100 + '%';
-  s.style.top = Math.random() * 100 + '%';
-  s.style.animationDelay = Math.random() * 3 + 's';
-  s.style.animationDuration = (2 + Math.random() * 3) + 's';
-  if (Math.random() > 0.7) { s.style.width = '4px'; s.style.height = '4px'; }
-  starsEl.appendChild(s);
-}
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script> -->
-</body>
+			// ─── SCROLL REVEAL ───────────────────────────────────────────
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((e) => {
+						if (e.isIntersecting) e.target.classList.add("visible");
+					});
+				},
+				{ threshold: 0.1 },
+			);
+			document
+				.querySelectorAll(".reveal")
+				.forEach((el) => observer.observe(el));
+		</script>
+	</body>
 </html>
