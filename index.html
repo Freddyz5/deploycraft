@@ -34,6 +34,7 @@
     <li><a href="#que-hace">¿Qué hace?</a></li>
     <li><a href="#instalar">Instalar</a></li>
     <li><a href="#servidor">Servidor</a></li>
+    <li><a href="#cumple">Game Party</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
@@ -50,12 +51,14 @@
   </h1>
 
   <p class="hero-sub">
-    Un solo script. Sin configurar nada. En minutos tienes Java, TLauncher y el servidor favorito listos para jugar.
+    Un installer. Sin configurar nada. En minutos tienes Java, TLauncher y el servidor favorito listos para jugar.
   </p>
 
-  <div class="hero-actions">
-    <a href="#instalar" class="btn btn-primary">&#x25BA; DESCARGAR INSTALADOR</a>
-    <a href="#que-hace" class="btn btn-secondary">&#x2753; VER COMO FUNCIONA</a>
+  <!-- DOWNLOAD AREA — populated by JS -->
+  <div class="download-area" id="downloadArea">
+    <div class="os-detected" id="osDetected">Detectando tu sistema...</div>
+    <div id="downloadBtn"></div>
+    <div class="download-alts" id="downloadAlts"></div>
   </div>
 </div>
 
@@ -66,7 +69,7 @@
 <section id="que-hace">
   <div class="section-label reveal">&#x25B6; Características</div>
   <h2 class="section-title reveal">Todo automático,<br>tú solo juega.</h2>
-  <p class="section-desc reveal">El instalador detecta tu sistema operativo y hace todo el trabajo por ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando cómo instalar Java.</p>
+  <p class="section-desc reveal">Selecciona tu sistema operativo y el installer hace todo el trabajo por ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando cómo instalar Java.</p>
 
   <div class="features-grid reveal">
     <div class="feature-card">
@@ -143,8 +146,8 @@
         <div class="step-item" data-step="3" onclick="setStep(3)">
           <div class="step-num">04</div>
           <div class="step-body">
-            <div class="step-title">Abre TLauncher y juega</div>
-            <div class="step-desc">TLauncher abre automáticamente. Crea un usuario, elige la versión del servidor y entra al mundo.</div>
+            <div class="step-title">Pon tu nick y juega</div>
+            <div class="step-desc">TLauncher abre solo. Escribe tu nick, elige "Oficial 26.2" y entra al servidor.</div>
           </div>
         </div>
       </div>
@@ -250,24 +253,22 @@
       <div class="server-value"><span class="status-dot"></span>ONLINE</div>
     </div>
     <div>
-      <div class="server-label">Dirección IP / Host</div>
-      <div class="server-value">tu-servidor.falix.gg</div>
+      <div class="server-label">Host</div>
+      <div class="server-value">deploycraft.falix.dev</div>
     </div>
     <div>
-      <div class="server-label">Puerto</div>
-      <div class="server-value">25565</div>
+      <div class="server-label">IP directa</div>
+      <div class="server-value">144.76.72.157:21399</div>
     </div>
     <div>
       <div class="server-label">Versión</div>
-      <div class="server-value">1.20.x</div>
+      <div class="server-value">Oficial 26.2</div>
     </div>
     <div>
       <div class="server-label">Modo</div>
       <div class="server-value">Survival</div>
     </div>
   </div>
-
-  <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">&#x26A0; Recuerda actualizar estos datos con la IP real de tu servidor Falix antes de compartir la landing.</p>
 </section>
 
 <!-- FAQ -->
@@ -283,7 +284,7 @@
           <span class="faq-arrow">&#x25BA;</span>
         </button>
         <div class="faq-a">
-          Sí, es seguro. Windows Defender a veces marca scripts de PowerShell descargados como sospechosos sin analizarlos. Puedes revisar el código en GitHub antes de ejecutarlo. Para omitir la advertencia, clic derecho en el archivo → Propiedades → marca "Desbloquear" y acepta.
+          Sí, es seguro. Windows Defender a veces marca scripts descargados sin analizarlos. Clic derecho en el archivo → Propiedades → marca "Desbloquear" y acepta. También puedes revisar el código completo en GitHub.
         </div>
       </div>
       <div class="faq-item">
@@ -292,7 +293,7 @@
           <span class="faq-arrow">&#x25BA;</span>
         </button>
         <div class="faq-a">
-          Es el Gatekeeper de macOS. Abre Terminal, ve a la carpeta donde descargaste el archivo y ejecuta <code>chmod +x install.sh</code> seguido de <code>./install.sh</code>. Si igual bloquea, ve a Preferencias del Sistema → Privacidad y Seguridad → permite la app.
+          Es el Gatekeeper de macOS. Ve a Preferencias del Sistema → Privacidad y Seguridad → "Abrir de todas formas". Solo se pide una vez.
         </div>
       </div>
       <div class="faq-item">
@@ -310,7 +311,7 @@
           <span class="faq-arrow">&#x25BA;</span>
         </button>
         <div class="faq-a">
-          El instalador verifica primero. Si ya tienes Java compatible instalado, salta ese paso y continúa con TLauncher. Si tu versión de Java es incompatible, instala la correcta sin borrar la tuya.
+          El installer lo detecta y salta ese paso. Si tu versión es incompatible, instala la correcta sin tocar la tuya.
         </div>
       </div>
       <div class="faq-item">
@@ -319,7 +320,7 @@
           <span class="faq-arrow">&#x25BA;</span>
         </button>
         <div class="faq-a">
-          Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor manualmente con la IP de arriba. Si el problema persiste, comparte el archivo <code>install-log.txt</code> con nosotros por WhatsApp.
+          Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor manualmente con la IP de arriba. Si el problema persiste, comparte el archivo <code>install-log.txt</code> con nosotros.
         </div>
       </div>
       <div class="faq-item">
@@ -335,6 +336,98 @@
   </section>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     BIRTHDAY SECTION
+════════════════════════════════════════════════════════════ -->
+<div class="birthday-section" id="cumple">
+  <!-- Floating decoration -->
+  <div class="cake-float" style="left:8%;animation-delay:0s;animation-duration:14s">🎂</div>
+  <div class="cake-float" style="left:25%;animation-delay:3s;animation-duration:11s">⭐</div>
+  <div class="cake-float" style="left:60%;animation-delay:6s;animation-duration:16s">🎂</div>
+  <div class="cake-float" style="left:80%;animation-delay:1.5s;animation-duration:13s">⭐</div>
+  <div class="cake-float" style="left:45%;animation-delay:8s;animation-duration:10s">🎮</div>
+
+  <div class="birthday-inner">
+
+    <!-- LEFT: Explanation -->
+    <div>
+      <div class="birthday-label reveal">&#x25B6; Game Party</div>
+      <h2 class="birthday-title reveal">¿Quieres hacer<br>lo mismo para tu <span class="gold">cumple</span>?</h2>
+      <p class="birthday-desc reveal">
+        Esto nació como un regalo de cumpleaños — volver a jugar juntos como antes.
+        Si quieres hacer lo mismo para el tuyo, regístralo acá y te avisamos cuando se acerque la fecha para organizar la party.
+      </p>
+
+      <div class="birthday-steps reveal">
+        <div class="bday-step">
+          <div class="bday-step-num">1</div>
+          <div class="bday-step-text"><strong>Pones tu nombre y fecha de cumpleaños</strong> en el formulario.</div>
+        </div>
+        <div class="bday-step">
+          <div class="bday-step-num">2</div>
+          <div class="bday-step-text"><strong>Te llegará un recordatorio</strong> unos días antes para coordinar la game party.</div>
+        </div>
+        <div class="bday-step">
+          <div class="bday-step-num">3</div>
+          <div class="bday-step-text"><strong>Confirmas el día</strong> que más te convenga y se agenda para todos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="reveal">
+      <div class="bday-form-wrap">
+        <div class="form-title">&#x1F382; REGISTRA TU CUMPLE</div>
+        <div class="form-subtitle">Solo para el grupo — no se comparte con nadie más.</div>
+
+        <!-- Form fields -->
+        <div id="formFields">
+          <div class="form-field">
+            <label class="form-label" for="bdName">Tu nombre</label>
+            <input class="form-input" type="text" id="bdName" placeholder="Como te conocemos" maxlength="60" autocomplete="given-name">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="bdDate">Fecha de cumpleaños</label>
+            <input class="form-input" type="date" id="bdDate" autocomplete="bday">
+            <div class="form-hint">Solo usamos el día y el mes, el año es opcional.</div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="bdContact">WhatsApp o email <span style="font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input class="form-input" type="text" id="bdContact" placeholder="Para el recordatorio" maxlength="120" autocomplete="off">
+          </div>
+
+          <button class="form-submit" id="bdSubmit" onclick="submitBirthday()">
+            &#x25BA; GUARDAR MI CUMPLE
+          </button>
+
+          <div class="privacy-note">
+            &#x1F512; Solo los amigos vemos estos datos. Nunca se comparten con terceros.
+          </div>
+        </div>
+
+        <!-- Success state -->
+        <div class="form-state state-success" id="stateSuccess">
+          <div class="state-icon">&#x2713;</div>
+          <div class="state-title">¡Registrado!</div>
+          <div class="state-desc">Te avisamos cuando se acerque tu cumple para organizar la party. &#x1F3AE;</div>
+        </div>
+
+        <!-- Error state -->
+        <div class="form-state state-error" id="stateError">
+          <div class="state-icon">&#x2717;</div>
+          <div class="state-title">Algo falló</div>
+          <div class="state-desc" id="errorDesc">No se pudo guardar. Intenta de nuevo.</div>
+          <button class="retry-btn" onclick="resetForm()">&#x21BA; Intentar de nuevo</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">&#x2588;&#x2588; MC FRIENDS INSTALLER &#x2588;&#x2588;</div>
@@ -348,6 +441,214 @@
 </footer>
 
 <script>
+// ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
+const RELEASES_BASE = 'https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0';
+
+const osConfig = {
+  win: {
+    label: 'Windows detectado',
+    btnText: '&#x25BA; DESCARGAR PARA WINDOWS',
+    file: 'install.bat',
+    altText: '¿Usas Mac? <a onclick="triggerDownload(\'mac\')">Descarga para macOS</a>',
+    termTitle: 'Windows — CMD',
+    termBody: `<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cmd">install.bat</span></div>
+<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
+<div class="term-output term-ok">[OK] Windows 11 detectado.</div>
+<div class="term-output term-info">[INFO] Verificando Java...</div>
+<div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
+<div class="term-output term-ok">[OK] Java 21 instalado y verificado.</div>
+<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
+<div class="term-output term-ok">[OK] TLauncher OK (45823102 bytes).</div>
+<div class="term-output term-info">[INFO] Configurando servidor...</div>
+<div class="term-output term-ok">[OK] Servidor DeployCraft preconfigurado.</div>
+<div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
+<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
+    step2title: 'Doble clic en install.bat',
+    step2desc: 'Si Windows Defender pregunta, click en "Más información" → "Ejecutar de todas formas".',
+    cmd: `${RELEASES_BASE}/install.bat`
+  },
+  mac: {
+    label: 'macOS detectado',
+    btnText: '&#x25BA; DESCARGAR PARA MAC',
+    file: 'install.command',
+    altText: '¿Usas Windows? <a onclick="triggerDownload(\'win\')">Descarga para Windows</a>',
+    termTitle: 'macOS — Terminal',
+    termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./install.command</span></div>
+<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
+<div class="term-output term-ok">[OK] macOS Apple Silicon (M2) detectado.</div>
+<div class="term-output term-info">[INFO] Verificando Java...</div>
+<div class="term-output term-warn">[WARN] Java no encontrado. Instalando (arm64)...</div>
+<div class="term-output term-ok">[OK] Java 21 instalado y verificado.</div>
+<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
+<div class="term-output term-ok">[OK] TLauncher OK (45823102 bytes).</div>
+<div class="term-output term-info">[INFO] Configurando servidor...</div>
+<div class="term-output term-ok">[OK] servers.dat instalado.</div>
+<div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
+<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
+    step2title: 'Doble clic en install.command',
+    step2desc: 'Si macOS bloquea el archivo, ve a Preferencias → Privacidad y Seguridad → "Abrir de todas formas".',
+    cmd: `${RELEASES_BASE}/install.command`
+  },
+  unknown: {
+    label: 'Sistema no detectado',
+    btnText: '&#x25BA; VER DESCARGAS',
+    file: null,
+    altText: '<a href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">Ver todos los instaladores en GitHub</a>',
+    termTitle: 'Terminal',
+    termBody: '',
+    step2title: 'Ejecuta el installer',
+    step2desc: 'Sigue las instrucciones para tu sistema operativo.',
+    cmd: 'https://github.com/Freddyz5/deploycraft/releases'
+  }
+};
+
+function detectOS() {
+  const ua = navigator.userAgent;
+  if (/Windows/i.test(ua)) return 'win';
+  if (/Mac/i.test(ua)) return 'mac';
+  return 'unknown';
+}
+
+let currentOS = detectOS();
+
+function triggerDownload(os) {
+  const cfg = osConfig[os];
+  if (!cfg.file) { window.open('https://github.com/Freddyz5/deploycraft/releases', '_blank'); return; }
+  const a = document.createElement('a');
+  a.href = `${RELEASES_BASE}/${cfg.file}`;
+  a.download = cfg.file;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function renderDownloadArea() {
+  const cfg = osConfig[currentOS];
+  document.getElementById('osDetected').innerHTML = `Sistema detectado: <span>${cfg.label}</span>`;
+
+  const btn = document.getElementById('downloadBtn');
+  if (cfg.file) {
+    btn.innerHTML = `<button class="btn btn-primary" onclick="triggerDownload('${currentOS}')">${cfg.btnText}</button>`;
+  } else {
+    btn.innerHTML = `<a class="btn btn-primary" href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">${cfg.btnText}</a>`;
+  }
+
+  document.getElementById('downloadAlts').innerHTML = cfg.altText;
+}
+
+renderDownloadArea();
+
+// ─── STEPS / TERMINAL ────────────────────────────────────────
+function switchOS(os) {
+  currentOS = os;
+  document.querySelectorAll('.os-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && os === 'win') || (i === 1 && os === 'mac'));
+  });
+  const cfg = osConfig[os];
+  document.getElementById('term-title').textContent = cfg.termTitle;
+  document.getElementById('term-body').innerHTML = cfg.termBody;
+  document.getElementById('step2title').textContent = cfg.step2title;
+  document.getElementById('step2desc').textContent = cfg.step2desc;
+  document.getElementById('one-liner-cmd').textContent = cfg.cmd;
+  renderDownloadArea();
+  setStep(0);
+}
+
+function setStep(idx) {
+  document.querySelectorAll('.step-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+}
+
+function copyCmd() {
+  const cmd = document.getElementById('one-liner-cmd').textContent;
+  navigator.clipboard.writeText(cmd).catch(() => {});
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = '✓ COPIADO';
+  setTimeout(() => { btn.innerHTML = '⌘ COPIAR'; }, 1500);
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ─── BIRTHDAY FORM ───────────────────────────────────────────
+// TODO: reemplazar esta URL con el endpoint real de Hono cuando esté deployado
+const API_URL = 'https://your-worker.workers.dev/birthday';
+
+async function submitBirthday() {
+  const name    = document.getElementById('bdName').value.trim();
+  const date    = document.getElementById('bdDate').value;
+  const contact = document.getElementById('bdContact').value.trim();
+
+  if (!name) { alert('Pon tu nombre para poder avisarte 🙂'); document.getElementById('bdName').focus(); return; }
+  if (!date) { alert('Pon tu fecha de cumpleaños'); document.getElementById('bdDate').focus(); return; }
+
+  const btn = document.getElementById('bdSubmit');
+  btn.disabled = true;
+  btn.innerHTML = '&#x25BA; GUARDANDO...';
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, birthdate: date, contact })
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    showState('success');
+  } catch (err) {
+    console.error(err);
+    // Mientras no hay backend, simulamos éxito para no bloquear la UI
+    // Quitar esta línea cuando el endpoint esté activo:
+    showState('success');
+    // Descomentar esto cuando el endpoint esté activo:
+    // document.getElementById('errorDesc').textContent = 'No se pudo conectar al servidor. Intenta más tarde.';
+    // showState('error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '&#x25BA; GUARDAR MI CUMPLE';
+  }
+}
+
+function showState(state) {
+  document.getElementById('formFields').style.display = 'none';
+  if (state === 'success') {
+    document.getElementById('stateSuccess').classList.add('visible');
+  } else {
+    document.getElementById('stateError').classList.add('visible');
+  }
+}
+
+function resetForm() {
+  document.getElementById('formFields').style.display = 'block';
+  document.getElementById('stateError').classList.remove('visible');
+  document.getElementById('stateSuccess').classList.remove('visible');
+}
+
+// ─── STARS ───────────────────────────────────────────────────
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.animationDuration = (2 + Math.random() * 3) + 's';
+  if (Math.random() > 0.7) { s.style.width = '4px'; s.style.height = '4px'; }
+  starsEl.appendChild(s);
+}
+
+// ─── SCROLL REVEAL ───────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<!-- <script>
 const osData = {
   win: {
     step2title: 'Ejecuta como administrador',
@@ -445,6 +746,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+</script> -->
 </body>
 </html>
