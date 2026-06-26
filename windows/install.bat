@@ -11,8 +11,9 @@ color 0A
 
 set "VERSION=3.0.0"
 set "RELEASES_BASE=https://github.com/Freddyz5/deploycraft/releases/latest/download"
-set "TLAUNCHER_URL=%RELEASES_BASE%/TLauncher.jar"
-set "SERVERS_DAT_URL=%RELEASES_BASE%/servers.dat"
+set "ASSETS_BASE=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0"
+set "TLAUNCHER_URL=%ASSETS_BASE%/TLauncher.jar"
+set "SERVERS_DAT_URL=%ASSETS_BASE%/servers.dat"
 set "JAVA_URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5+11/OpenJDK21U-jdk_x64_windows_hotspot_21.0.5_11.msi"
 set "JAVA_MSI=%TEMP%\java21_deploycraft.msi"
 set "INSTALL_DIR=%USERPROFILE%\TLauncher"
@@ -164,9 +165,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
     "$ProgressPreference='SilentlyContinue';" ^
     "try { Invoke-WebRequest -Uri '%TLAUNCHER_URL%' -OutFile '%INSTALL_DIR%\TLauncher.jar' -UseBasicParsing } catch { exit 1 }"
 
+set "TLAUNCHER_DL_CODE=!errorlevel!"
+
 if not exist "%INSTALL_DIR%\TLauncher.jar" (
     call :error "No se pudo descargar TLauncher. Verifica tu internet."
-    call :log "ERROR: TLauncher.jar no descargado."
+    call :log "ERROR: TLauncher.jar no descargado. Codigo PowerShell: !TLAUNCHER_DL_CODE!"
+    call :warn "URL usada: %TLAUNCHER_URL%"
     call :abort
     exit /b 1
 )
@@ -194,12 +198,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
     "$ProgressPreference='SilentlyContinue';" ^
     "try { Invoke-WebRequest -Uri '%SERVERS_DAT_URL%' -OutFile '%MC_DIR%\servers.dat' -UseBasicParsing } catch { exit 1 }"
 
+set "SERVERS_DL_CODE=!errorlevel!"
+
 if exist "%MC_DIR%\servers.dat" (
     call :ok "Servidor DeployCraft preconfigurado en Multijugador."
     call :log "servers.dat instalado en %MC_DIR%"
 ) else (
     call :warn "Servidor no preconfigurado. Agregalo manual: deploycraft.falix.dev"
-    call :log "WARN: servers.dat no descargado. Continuando..."
+    call :log "WARN: servers.dat no descargado. Codigo PowerShell: !SERVERS_DL_CODE! | URL: %SERVERS_DAT_URL%"
 )
 
 :: ─────────────────────────────────────────────────────────────
