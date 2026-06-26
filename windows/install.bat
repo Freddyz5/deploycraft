@@ -9,8 +9,7 @@ color 0A
 ::       msiexec /wait real, check TLauncher proceso
 :: ============================================================
 
-set "VERSION=3.0.0"
-set "RELEASES_BASE=https://github.com/Freddyz5/deploycraft/releases/latest/download"
+set "VERSION=2.0.0"
 set "ASSETS_BASE=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0"
 set "TLAUNCHER_URL=%ASSETS_BASE%/TLauncher.jar"
 set "SERVERS_DAT_URL=%ASSETS_BASE%/servers.dat"
@@ -40,15 +39,31 @@ echo   DeployCraft Installer v%VERSION%
 echo   Minecraft para amigos
 echo  ============================================
 echo.
-call :info "Iniciando instalacion..."
+
+call :EnsureInternet
+call :EnsureJava
+call :EnsureFolders
+call :EnsureTLauncher
+call :ConfigureMinecraft
+call :CreateShortcut
+call :LaunchTLauncher
+
 echo.
+call :log "Script finalizado."
+pause
+exit /b 0
 
 :: ─────────────────────────────────────────────────────────────
-:: PASO 1 — JAVA
-:: FIX 1: Busca java en PATH y en rutas de instalacion conocidas
-:: FIX 2: Refresca PATH desde el registro (no de la sesion vieja)
-:: FIX 3: Verifica con java.exe real despues de instalar
+:: SUBROUTINES
 :: ─────────────────────────────────────────────────────────────
+
+:EnsureInternet
+call :log "Entrando a EnsureInternet"
+:: Placeholder for internet check if needed in future
+goto :eof
+
+:EnsureJava
+call :log "Entrando a EnsureJava"
 call :step "PASO 1/5" "Verificando Java..."
 
 call :find_java
@@ -142,10 +157,10 @@ call :ok "Java 21 instalado y verificado: !JAVA_EXE!"
 call :log "Java verificado OK: !JAVA_EXE!"
 
 :java_done
+goto :eof
 
-:: ─────────────────────────────────────────────────────────────
-:: PASO 2 — CARPETAS
-:: ─────────────────────────────────────────────────────────────
+:EnsureFolders
+call :log "Entrando a EnsureFolders"
 call :step "PASO 2/5" "Preparando carpetas..."
 call :log "Creando carpetas..."
 
@@ -154,11 +169,25 @@ if not exist "%MC_DIR%"      mkdir "%MC_DIR%"
 
 call :ok "Carpetas listas."
 call :log "INSTALL_DIR=%INSTALL_DIR% | MC_DIR=%MC_DIR%"
+goto :eof
 
-:: ─────────────────────────────────────────────────────────────
-:: PASO 3 — TLAUNCHER
-:: ─────────────────────────────────────────────────────────────
+:EnsureTLauncher
+call :log "Entrando a EnsureTLauncher"
 call :step "PASO 3/5" "Descargando TLauncher..."
+call :log "Verificando si TLauncher.jar ya existe..."
+
+if exist "%INSTALL_DIR%\TLauncher.jar" (
+    for %%F in ("%INSTALL_DIR%\TLauncher.jar") do set "JAR_SIZE=%%~zF"
+    if !JAR_SIZE! GEQ 1000000 (
+        call :ok "TLauncher.jar ya existe y es valido (!JAR_SIZE! bytes). Saltando descarga."
+        call :log "TLauncher.jar existente OK: !JAR_SIZE! bytes"
+        goto :eof
+    ) else (
+        call :warn "TLauncher.jar existente corrupto o muy pequeno (!JAR_SIZE! bytes). Se descargara de nuevo."
+        del "%INSTALL_DIR%\TLauncher.jar" >nul 2>&1
+    )
+)
+
 call :log "Descargando TLauncher.jar desde GitHub Releases..."
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
@@ -187,10 +216,10 @@ if !JAR_SIZE! LSS 1000000 (
 
 call :ok "TLauncher descargado OK (!JAR_SIZE! bytes)."
 call :log "TLauncher.jar OK: !JAR_SIZE! bytes"
+goto :eof
 
-:: ─────────────────────────────────────────────────────────────
-:: PASO 4 — SERVIDOR
-:: ─────────────────────────────────────────────────────────────
+:ConfigureMinecraft
+call :log "Entrando a ConfigureMinecraft"
 call :step "PASO 4/5" "Configurando servidor DeployCraft..."
 call :log "Descargando servers.dat..."
 
@@ -207,10 +236,10 @@ if exist "%MC_DIR%\servers.dat" (
     call :warn "Servidor no preconfigurado. Agregalo manual: deploycraft.falix.dev"
     call :log "WARN: servers.dat no descargado. Codigo PowerShell: !SERVERS_DL_CODE! | URL: %SERVERS_DAT_URL%"
 )
+goto :eof
 
-:: ─────────────────────────────────────────────────────────────
-:: PASO 5 — ACCESO DIRECTO
-:: ─────────────────────────────────────────────────────────────
+:CreateShortcut
+call :log "Entrando a CreateShortcut"
 call :step "PASO 5/5" "Creando acceso directo en el Escritorio..."
 call :log "Creando TLauncher.bat en Escritorio..."
 
@@ -226,10 +255,10 @@ if exist "%SHORTCUT%" (
     call :warn "No se pudo crear el acceso directo."
     call :log "WARN: Acceso directo no creado."
 )
+goto :eof
 
-:: ─────────────────────────────────────────────────────────────
-:: ABRIR TLAUNCHER + FIX 4: Verificar que el proceso levanta
-:: ─────────────────────────────────────────────────────────────
+:LaunchTLauncher
+call :log "Entrando a LaunchTLauncher"
 echo.
 echo  ============================================
 call :ok "INSTALACION COMPLETADA"
@@ -247,35 +276,13 @@ call :info "Abriendo TLauncher..."
 call :log "Lanzando TLauncher con: !JAVA_EXE!"
 
 start "" "!JAVA_EXE!" -jar "%INSTALL_DIR%\TLauncher.jar"
-
-:: FIX 4: Esperar y verificar que el proceso java levanto
-call :info "Verificando que TLauncher inicio correctamente..."
-timeout /t 6 /nobreak >nul
-
-set "TLAUNCHER_OK=0"
-tasklist 2>nul | find /i "javaw.exe" >nul && set "TLAUNCHER_OK=1"
-if "!TLAUNCHER_OK!"=="0" (
-    tasklist 2>nul | find /i "java.exe" >nul && set "TLAUNCHER_OK=1"
-)
-
-if "!TLAUNCHER_OK!"=="1" (
-    call :ok "TLauncher corriendo correctamente."
-    call :log "TLauncher OK — proceso java detectado."
-) else (
-    call :warn "TLauncher puede no haber abierto automaticamente."
-    call :warn "Haz doble clic en 'TLauncher.bat' en tu Escritorio para abrirlo."
-    call :log "WARN: No se detecto proceso java tras 6 segundos."
-)
-
-echo.
-call :log "Script finalizado."
-pause
-exit /b 0
+goto :eof
 
 :: ─────────────────────────────────────────────────────────────
 :: SUBRUTINA: find_java
 :: Busca java en PATH y en rutas de instalacion conocidas.
 :: Setea JAVA_FOUND=1 y JAVA_EXE=<ruta> si lo encuentra.
+:: Busca jdk-* y jre-* en lugar de solo jdk-21/jre-21.
 :: ─────────────────────────────────────────────────────────────
 :find_java
 set "JAVA_FOUND=0"
@@ -294,7 +301,7 @@ for %%D in (
     "%ProgramFiles(x86)%\Java"
 ) do (
     if exist "%%~D" (
-        for /d %%S in ("%%~D\jdk-21*" "%%~D\jre-21*") do (
+        for /d %%S in ("%%~D\jdk-*" "%%~D\jre-*") do (
             if exist "%%S\bin\java.exe" (
                 "%%S\bin\java.exe" -version >nul 2>&1
                 if !errorlevel! == 0 (
