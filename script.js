@@ -151,8 +151,8 @@ function toggleFaq(btn) {
 }
 
 // ─── BIRTHDAY FORM ───────────────────────────────────────────
-// Frontend en GitHub Pages + API en Vercel: reemplaza TU-PROYECTO
-const API_URL = "https://deploycraft.vercel.app/api/birthday";
+// Frontend y API desplegados juntos en Vercel.
+const API_URL = "/api/birthday";
 
 async function submitBirthday() {
 	const name    = document.getElementById("bdName").value.trim();
