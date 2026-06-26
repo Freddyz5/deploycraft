@@ -24,7 +24,7 @@ const osConfig = {
 	mac: {
 		label: "macOS detectado",
 		btnText: "&#x25BA; DESCARGAR PARA MAC",
-		file: "Installer.app",
+		file: "Installer.zip",
 		altText:
 			"¿Usas Windows? <a onclick=\"triggerDownload('win')\">Descarga para Windows</a>",
 		termTitle: "macOS — Terminal",
