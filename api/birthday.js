@@ -3,9 +3,7 @@ const NOTION_VERSION = "2022-06-28";
 
 export default async function handler(req, res) {
   // CORS — permite llamadas solo desde el frontend desplegado
-  const allowedOrigin = "https://freddyz5.github.io";
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
