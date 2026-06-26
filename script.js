@@ -151,12 +151,12 @@ function toggleFaq(btn) {
 }
 
 // ─── BIRTHDAY FORM ───────────────────────────────────────────
-// TODO: reemplazar esta URL con el endpoint real de Hono cuando esté deployado
-const API_URL = "https://your-worker.workers.dev/birthday";
+// Frontend en GitHub Pages + API en Vercel: reemplaza TU-PROYECTO
+const API_URL = "https://deploycraft.vercel.app/api/birthday";
 
 async function submitBirthday() {
-	const name = document.getElementById("bdName").value.trim();
-	const date = document.getElementById("bdDate").value;
+	const name    = document.getElementById("bdName").value.trim();
+	const date    = document.getElementById("bdDate").value;
 	const contact = document.getElementById("bdContact").value.trim();
 
 	if (!name) {
@@ -181,17 +181,17 @@ async function submitBirthday() {
 			body: JSON.stringify({ name, birthdate: date, contact }),
 		});
 
-		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+		if (!res.ok) {
+			const body = await res.json().catch(() => ({}));
+			throw new Error(body.error ?? `HTTP ${res.status}`);
+		}
 
 		showState("success");
 	} catch (err) {
-		console.error(err);
-		// Mientras no hay backend, simulamos éxito para no bloquear la UI
-		// Quitar esta línea cuando el endpoint esté activo:
-		showState("success");
-		// Descomentar esto cuando el endpoint esté activo:
-		// document.getElementById('errorDesc').textContent = 'No se pudo conectar al servidor. Intenta más tarde.';
-		// showState('error');
+		console.error("Birthday submit error:", err);
+		document.getElementById("errorDesc").textContent =
+			err.message || "No se pudo guardar. Intenta de nuevo.";
+		showState("error");
 	} finally {
 		btn.disabled = false;
 		btn.innerHTML = "&#x25BA; GUARDAR MI CUMPLE";
