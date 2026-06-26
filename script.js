@@ -1,55 +1,43 @@
 // ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
 const RELEASES_BASE =
-	"https://github.com/Freddyz5/deploycraft/releases/latest/download";
+	"https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0";
 
 const osConfig = {
 	win: {
 		label: "Windows detectado",
 		btnText: "&#x25BA; DESCARGAR PARA WINDOWS",
-		file: "install.bat",
+		file: "Installer.bat",
 		altText:
 			"¿Usas Mac? <a onclick=\"triggerDownload('mac')\">Descarga para macOS</a>",
 		termTitle: "Windows — CMD",
 		termBody: `<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cmd">install.bat</span></div>
-<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
-<div class="term-output term-ok">[OK] Windows 11 detectado.</div>
-<div class="term-output term-info">[INFO] Verificando Java...</div>
-<div class="term-output term-warn">[WARN] Java no encontrado. Instalando...</div>
-<div class="term-output term-ok">[OK] Java 21 instalado y verificado.</div>
-<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
-<div class="term-output term-ok">[OK] TLauncher OK (45823102 bytes).</div>
-<div class="term-output term-info">[INFO] Configurando servidor...</div>
-<div class="term-output term-ok">[OK] Servidor DeployCraft preconfigurado.</div>
-<div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
+<div class="term-output term-info">[INFO] Buscando TLauncher en el Escritorio...</div>
+<div class="term-output term-warn">[INFO] TLauncher no encontrado. Descargando...</div>
+<div class="term-output term-ok">[OK] TLauncher descargado en el Escritorio.</div>
+<div class="term-output term-ok">[OK] Abriendo TLauncher...</div>
 <div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
 		step2title: "Doble clic en install.bat",
 		step2desc:
-			'Si Windows Defender pregunta, click en "Más información" → "Ejecutar de todas formas".',
-		cmd: `${RELEASES_BASE}/install.bat`,
+			'Si Windows pregunta, click en "Más información" → "Ejecutar de todas formas". Es seguro, puedes ver el código en GitHub.',
+		cmd: `${RELEASES_BASE}/Installer.bat`,
 	},
 	mac: {
 		label: "macOS detectado",
 		btnText: "&#x25BA; DESCARGAR PARA MAC",
-		file: "install.command",
+		file: "Installer.app",
 		altText:
 			"¿Usas Windows? <a onclick=\"triggerDownload('win')\">Descarga para Windows</a>",
 		termTitle: "macOS — Terminal",
-		termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./install.command</span></div>
-<div class="term-output term-info">[INFO] Detectando sistema operativo...</div>
-<div class="term-output term-ok">[OK] macOS Apple Silicon (M2) detectado.</div>
-<div class="term-output term-info">[INFO] Verificando Java...</div>
-<div class="term-output term-warn">[WARN] Java no encontrado. Instalando (arm64)...</div>
-<div class="term-output term-ok">[OK] Java 21 instalado y verificado.</div>
-<div class="term-output term-info">[INFO] Descargando TLauncher...</div>
-<div class="term-output term-ok">[OK] TLauncher OK (45823102 bytes).</div>
-<div class="term-output term-info">[INFO] Configurando servidor...</div>
-<div class="term-output term-ok">[OK] servers.dat instalado.</div>
-<div class="term-output term-ok">[OK] INSTALACION COMPLETADA</div>
+		termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./Installer.app</span></div>
+<div class="term-output term-info">[INFO] Buscando TLauncher en el Escritorio...</div>
+<div class="term-output term-warn">[INFO] TLauncher no encontrado. Descargando...</div>
+<div class="term-output term-ok">[OK] TLauncher descargado en el Escritorio.</div>
+<div class="term-output term-ok">[OK] Abriendo TLauncher...</div>
 <div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
 		step2title: "Doble clic en install.command",
 		step2desc:
 			'Si macOS bloquea el archivo, ve a Preferencias → Privacidad y Seguridad → "Abrir de todas formas".',
-		cmd: `${RELEASES_BASE}/install.command`,
+		cmd: `${RELEASES_BASE}/Installer.zip`,
 	},
 	unknown: {
 		label: "Sistema no detectado",
@@ -172,8 +160,8 @@ function toggleFaq(btn) {
 const API_URL = "/api/birthday";
 
 async function submitBirthday() {
-	const name    = document.getElementById("bdName").value.trim();
-	const date    = document.getElementById("bdDate").value;
+	const name = document.getElementById("bdName").value.trim();
+	const date = document.getElementById("bdDate").value;
 	const contact = document.getElementById("bdContact").value.trim();
 
 	if (!name) {

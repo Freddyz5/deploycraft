@@ -72,60 +72,60 @@
 		<!-- QUE HACE -->
 		<section id="que-hace">
 			<div class="section-label reveal">&#x25B6; Características</div>
-			<h2 class="section-title reveal">Todo automático,<br />tú solo juega.</h2>
+			<h2 class="section-title reveal">Simple y directo.</h2>
 			<p class="section-desc reveal">
-				Selecciona tu sistema operativo y el installer hace todo el trabajo por
-				ti. Sin tecnicismos, sin comandos raros, sin perder 2 horas buscando
-				cómo instalar Java.
+				Selecciona tu sistema operativo y el installer descarga TLauncher
+				automáticamente y lo abre. Si ya lo tienes, lo lanza directo. Sin
+				complicaciones.
 			</p>
 
 			<div class="features-grid reveal">
 				<div class="feature-card">
-					<span class="feature-icon">&#x2615;</span>
-					<div class="feature-title">Java automático</div>
-					<div class="feature-desc">
-						Detecta si tienes Java instalado y lo descarga si no. Sin buscar
-						versiones, sin configurar variables de entorno.
-					</div>
-				</div>
-				<div class="feature-card">
 					<span class="feature-icon">&#x1F3AE;</span>
-					<div class="feature-title">TLauncher incluido</div>
+					<div class="feature-title">TLauncher automático</div>
 					<div class="feature-desc">
-						Descarga e instala TLauncher automáticamente. Solo abre, crea tu
-						usuario y empieza a jugar.
-					</div>
-				</div>
-				<div class="feature-card">
-					<span class="feature-icon">&#x1F310;</span>
-					<div class="feature-title">Servidor preconfigurado</div>
-					<div class="feature-desc">
-						El servidor de los amigos ya viene cargado. No tienes que escribir
-						ninguna IP a mano.
+						Descarga TLauncher en tu Escritorio y lo abre solo. Si ya lo tienes,
+						lo lanza directo sin descargar nada.
 					</div>
 				</div>
 				<div class="feature-card">
 					<span class="feature-icon">&#x1F4BB;</span>
 					<div class="feature-title">Windows y macOS</div>
 					<div class="feature-desc">
-						PowerShell para Windows 10/11. Bash para Mac Intel y Apple Silicon
-						(M1, M2, M3...).
+						Un script para Windows y otro para Mac. Doble clic y listo, sin
+						instalar nada extra.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F310;</span>
+					<div class="feature-title">Servidor compartido</div>
+					<div class="feature-desc">
+						Conéctate al servidor del grupo en segundos. Los datos de conexión
+						están todos acá abajo.
+					</div>
+				</div>
+				<div class="feature-card">
+					<span class="feature-icon">&#x1F513;</span>
+					<div class="feature-title">Sin cuenta oficial</div>
+					<div class="feature-desc">
+						TLauncher permite jugar sin cuenta de Microsoft. Solo pon tu nick y
+						entra al servidor.
 					</div>
 				</div>
 				<div class="feature-card">
 					<span class="feature-icon">&#x1F517;</span>
 					<div class="feature-title">Acceso directo</div>
 					<div class="feature-desc">
-						Crea un acceso directo en el escritorio para que abrir TLauncher sea
-						un doble clic.
+						TLauncher queda en tu Escritorio. La próxima vez es solo doble clic
+						para abrir.
 					</div>
 				</div>
 				<div class="feature-card">
 					<span class="feature-icon">&#x1F4CB;</span>
-					<div class="feature-title">Registro de errores</div>
+					<div class="feature-title">Código abierto</div>
 					<div class="feature-desc">
-						Si algo falla, guarda un log con el detalle. Compártelo por WhatsApp
-						y en minutos está resuelto.
+						Puedes ver exactamente qué hace el script en GitHub antes de
+						ejecutarlo. Sin sorpresas.
 					</div>
 				</div>
 			</div>
@@ -140,7 +140,7 @@
 				<div class="section-label reveal">&#x25B6; Instalación</div>
 				<h2 class="section-title reveal">¿Cómo se instala?</h2>
 				<p class="section-desc reveal">
-					Elige tu sistema operativo y sigue los pasos. En serio, son muy pocos.
+					Elige tu sistema y sigue los pasos. Son pocos, lo prometemos.
 				</p>
 
 				<div class="os-tabs reveal">
@@ -154,45 +154,44 @@
 
 				<div class="steps-grid">
 					<div class="step-list reveal">
-						<div class="step-item active" data-step="0" onclick="setStep(0)">
+						<div class="step-item active" onclick="setStep(0)">
 							<div class="step-num">01</div>
-							<div class="step-body">
-								<div class="step-title">Descarga el instalador</div>
+							<div>
+								<div class="step-title">Descarga el installer</div>
 								<div class="step-desc">
-									Ve a Releases en GitHub y descarga el archivo para tu sistema
-									operativo.
+									Usa el botón de arriba o descárgalo desde GitHub Releases.
 								</div>
 							</div>
 						</div>
-						<div class="step-item" data-step="1" onclick="setStep(1)">
+						<div class="step-item" onclick="setStep(1)">
 							<div class="step-num">02</div>
-							<div class="step-body">
+							<div>
 								<div class="step-title" id="step2title">
 									Doble clic en install.bat
 								</div>
 								<div class="step-desc" id="step2desc">
-									Si Windows Defender pregunta, clic en "Más información" →
-									"Ejecutar de todas formas".
+									Si Windows pregunta, click en "Más información" → "Ejecutar de
+									todas formas". Es seguro, puedes ver el código en GitHub.
 								</div>
 							</div>
 						</div>
-						<div class="step-item" data-step="2" onclick="setStep(2)">
+						<div class="step-item" onclick="setStep(2)">
 							<div class="step-num">03</div>
-							<div class="step-body">
-								<div class="step-title">Espera que termine</div>
+							<div>
+								<div class="step-title">TLauncher se abre solo</div>
 								<div class="step-desc">
-									El script instala Java, TLauncher y configura todo solo.
-									Demora 2–5 minutos dependiendo de tu internet.
+									El installer descarga TLauncher en tu Escritorio y lo abre. Si
+									ya lo tenías instalado, lo lanza directo.
 								</div>
 							</div>
 						</div>
-						<div class="step-item" data-step="3" onclick="setStep(3)">
+						<div class="step-item" onclick="setStep(3)">
 							<div class="step-num">04</div>
-							<div class="step-body">
-								<div class="step-title">Pon tu nick y juega</div>
+							<div>
+								<div class="step-title">Conéctate al servidor</div>
 								<div class="step-desc">
-									TLauncher abre solo. Escribe tu nick, elige "Oficial 26.2" y
-									entra al servidor.
+									Pon tu nick, elige "Oficial 26.2", entra al juego y agrega el
+									servidor manualmente. Los datos están abajo.
 								</div>
 							</div>
 						</div>
@@ -204,7 +203,9 @@
 								<div class="dot dot-red"></div>
 								<div class="dot dot-yellow"></div>
 								<div class="dot dot-green"></div>
-								<span class="terminal-title" id="term-title">Windows - CMD</span>
+								<span class="terminal-title" id="term-title"
+									>Windows — CMD</span
+								>
 							</div>
 							<div class="terminal-body" id="term-body">
 								<div class="term-line">
@@ -212,35 +213,16 @@
 									><span class="term-cmd">install.bat</span>
 								</div>
 								<div class="term-output term-info">
-									[INFO] Detectando sistema operativo...
-								</div>
-								<div class="term-output term-ok">
-									[OK] Windows 11 detectado.
-								</div>
-								<div class="term-output term-info">
-									[INFO] Verificando Java...
+									[INFO] Buscando TLauncher en el Escritorio...
 								</div>
 								<div class="term-output term-warn">
-									[WARN] Java no encontrado. Instalando...
+									[INFO] TLauncher no encontrado. Descargando...
 								</div>
 								<div class="term-output term-ok">
-									[OK] Java 21 instalado y verificado.
-								</div>
-								<div class="term-output term-info">
-									[INFO] Descargando TLauncher...
-								</div>
-								<div class="term-output term-ok">[OK] TLauncher instalado.</div>
-								<div class="term-output term-info">
-									[INFO] Configurando servidor favorito...
+									[OK] TLauncher descargado en el Escritorio.
 								</div>
 								<div class="term-output term-ok">
-									[OK] TLauncher OK (45823102 bytes).
-								</div>
-								<div class="term-output term-info">
-									[INFO] Configurando servidor...
-								</div>
-								<div class="term-output term-ok">
-									[OK] Servidor DeployCraft preconfigurado.
+									[OK] Abriendo TLauncher...
 								</div>
 								<div class="term-line">
 									<span class="term-ps">C:\Users\Tú&gt;</span
@@ -248,10 +230,9 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="one-liner">
 							<code id="one-liner-cmd"
-								>https://github.com/Freddyz5/deploycraft/releases/latest/download/install.bat</code
+								>https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/Installer.bat</code
 							>
 							<button class="copy-btn" onclick="copyCmd()">
 								&#x2398; COPIAR
@@ -323,8 +304,8 @@
 			<div class="section-label reveal">&#x25B6; El servidor</div>
 			<h2 class="section-title reveal">¿A dónde nos conectamos?</h2>
 			<p class="section-desc reveal">
-				El instalador ya configura el servidor automáticamente. Pero si
-				necesitas conectarte a mano, acá están los datos.
+				El servidor se agrega manualmente en TLauncher. Son 3 clics, sigue los
+				pasos de abajo.
 			</p>
 
 			<div class="server-card reveal">
@@ -347,6 +328,55 @@
 				<div>
 					<div class="server-label">Modo</div>
 					<div class="server-value">Survival</div>
+				</div>
+			</div>
+
+			<div class="connect-steps reveal">
+				<div class="connect-title">&#x25B6; Cómo agregar el servidor</div>
+				<div class="connect-grid">
+					<div class="connect-step">
+						<div class="connect-num">1</div>
+						<div class="connect-body">
+							<div class="connect-step-title">
+								Abre TLauncher y entra al juego
+							</div>
+							<div class="connect-step-desc">
+								Pon tu nick abajo a la izquierda. Selecciona
+								<strong>"Oficial 26.2"</strong> en el desplegable. Click en
+								<strong>"Entrar al juego"</strong> — la primera vez descarga
+								Minecraft, puede tardar unos minutos.
+							</div>
+						</div>
+					</div>
+					<div class="connect-step">
+						<div class="connect-num">2</div>
+						<div class="connect-body">
+							<div class="connect-step-title">Ve a Multijugador</div>
+							<div class="connect-step-desc">
+								En el menú principal de Minecraft, click en
+								<strong>"Multijugador"</strong>. Si aparece un aviso de
+								seguridad, acepta para continuar.
+							</div>
+						</div>
+					</div>
+					<div class="connect-step">
+						<div class="connect-num">3</div>
+						<div class="connect-body">
+							<div class="connect-step-title">
+								Agrega el servidor y conéctate
+							</div>
+							<div class="connect-step-desc">
+								Click en <strong>"Agregar servidor"</strong>. En nombre pon
+								<strong>DeployCraft</strong>. En dirección pon: <br /><code
+									class="server-code"
+									>deploycraft.falix.dev</code
+								><br />
+								o <code class="server-code">144.76.72.157:21399</code><br />
+								Click en <strong>"Listo"</strong> y luego
+								<strong>"Unirse al servidor"</strong>.
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -455,7 +485,8 @@
 									id="bdDate"
 									autocomplete="bday" />
 								<div class="form-hint">
-									Solo usamos el día y el mes, el año puede ser cualquier número.
+									Solo usamos el día y el mes, el año puede ser cualquier
+									número.
 								</div>
 							</div>
 
@@ -527,12 +558,13 @@
 			<section>
 				<div class="section-label reveal">&#x25B6; Preguntas frecuentes</div>
 				<h2 class="section-title reveal">¿Algo no funcionó?</h2>
-
 				<div class="faq-list reveal">
 					<div class="faq-item">
 						<button class="faq-q" onclick="toggleFaq(this)">
-							El antivirus bloqueó el instalador en Windows ¿es seguro?
-							<span class="faq-arrow">&#x25BA;</span>
+							El antivirus bloqueó el installer en Windows ¿es seguro?<span
+								class="faq-arrow"
+								>&#x25BA;</span
+							>
 						</button>
 						<div class="faq-a">
 							Sí, es seguro. Windows Defender a veces marca scripts descargados
@@ -544,8 +576,7 @@
 					<div class="faq-item">
 						<button class="faq-q" onclick="toggleFaq(this)">
 							En Mac aparece "no se puede abrir porque el desarrollador es
-							desconocido"
-							<span class="faq-arrow">&#x25BA;</span>
+							desconocido"<span class="faq-arrow">&#x25BA;</span>
 						</button>
 						<div class="faq-a">
 							Es el Gatekeeper de macOS. Ve a Preferencias del Sistema →
@@ -555,46 +586,51 @@
 					</div>
 					<div class="faq-item">
 						<button class="faq-q" onclick="toggleFaq(this)">
-							¿TLauncher es legal y gratuito?
-							<span class="faq-arrow">&#x25BA;</span>
+							¿TLauncher es gratuito?<span class="faq-arrow">&#x25BA;</span>
 						</button>
 						<div class="faq-a">
-							TLauncher es un launcher no oficial que permite jugar de forma
-							gratuita. No está vinculado a Mojang/Microsoft. Úsalo bajo tu
-							responsabilidad; si tienes una cuenta oficial, te recomendamos el
-							launcher oficial de Minecraft.
+							Sí. TLauncher es un launcher no oficial que permite jugar sin
+							cuenta de Microsoft. No está vinculado a Mojang. Si tienes cuenta
+							oficial puedes usar el launcher oficial de Minecraft en su lugar.
 						</div>
 					</div>
 					<div class="faq-item">
 						<button class="faq-q" onclick="toggleFaq(this)">
-							¿Qué pasa si ya tengo Java instalado?
-							<span class="faq-arrow">&#x25BA;</span>
+							El servidor no aparece o no puedo conectarme<span
+								class="faq-arrow"
+								>&#x25BA;</span
+							>
 						</button>
 						<div class="faq-a">
-							El installer lo detecta y salta ese paso. Si tu versión es
-							incompatible, instala la correcta sin tocar la tuya.
+							Asegúrate de estar usando la versión <code>Oficial 26.2</code> en
+							TLauncher. Si el servidor no aparece, agrégalo manualmente desde
+							Multijugador → Agregar servidor →
+							<code>deploycraft.falix.dev</code>. Si el problema persiste,
+							escríbenos por WhatsApp.
 						</div>
 					</div>
 					<div class="faq-item">
 						<button class="faq-q" onclick="toggleFaq(this)">
-							El servidor no aparece en TLauncher después de instalar
-							<span class="faq-arrow">&#x25BA;</span>
-						</button>
-						<div class="faq-a">
-							Abre TLauncher, ve a la sección "Multiplayer" y agrega el servidor
-							manualmente con la IP de arriba. Si el problema persiste, comparte
-							el archivo <code>install-log.txt</code> con nosotros.
-						</div>
-					</div>
-					<div class="faq-item">
-						<button class="faq-q" onclick="toggleFaq(this)">
-							¿Cuánta RAM asigno a Minecraft?
-							<span class="faq-arrow">&#x25BA;</span>
+							¿Cuánta RAM asigno a Minecraft?<span class="faq-arrow"
+								>&#x25BA;</span
+							>
 						</button>
 						<div class="faq-a">
 							En TLauncher, ve a Configuración → JVM Arguments y ajusta
-							<code>-Xmx</code>. Para juego fluido recomendamos 2–3 GB si tienes
-							8 GB de RAM en total. No asignes más del 50–60% de tu RAM total.
+							<code>-Xmx2G</code> para 2 GB. No asignes más del 50–60% de tu RAM
+							total para no ralentizar el resto del sistema.
+						</div>
+					</div>
+					<div class="faq-item">
+						<button class="faq-q" onclick="toggleFaq(this)">
+							¿Qué nick pongo si ya lo usa alguien más?<span class="faq-arrow"
+								>&#x25BA;</span
+							>
+						</button>
+						<div class="faq-a">
+							En modo offline cada quien elige su nick libremente. Coordina con
+							el grupo para que no haya dos con el mismo nombre, porque en el
+							servidor se verían igual.
 						</div>
 					</div>
 				</div>
@@ -613,9 +649,17 @@
 				Hecho con amor (y muchos bloques) para jugar juntos &#x2764;
 			</div>
 			<div class="footer-links">
-				<a href="#https://github.com/Freddyz5/deploycraft" target="_blank">GitHub</a>
-				<a href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">Releases</a>
-				<a href="https://github.com/Freddyz5/deploycraft/issues" target="_blank">Reportar error</a>
+				<a href="#https://github.com/Freddyz5/deploycraft" target="_blank"
+					>GitHub</a
+				>
+				<a
+					href="https://github.com/Freddyz5/deploycraft/releases"
+					target="_blank"
+					>Releases</a
+				>
+				<a href="https://github.com/Freddyz5/deploycraft/issues" target="_blank"
+					>Reportar error</a
+				>
 			</div>
 			<div style="font-size: 0.75rem; color: var(--text-muted)">
 				MIT License &mdash; Proyecto privado entre amigos &mdash; No afiliado a
