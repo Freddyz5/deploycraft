@@ -4,20 +4,22 @@ title DeployCraft Installer
 color 0A
 
 :: ============================================================
-::  DeployCraft Installer - Windows
-::  Instala Java, TLauncher y configura el servidor de amigos
+::  DeployCraft Installer - Windows v2.0.0
+::  FIX: Java post-install verify, PATH correcto,
+::       msiexec /wait real, check TLauncher proceso
 :: ============================================================
 
 set "VERSION=2.0.0"
 set "TLAUNCHER_URL=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/TLauncher.jar"
 set "SERVERS_DAT_URL=https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0/servers.dat"
-set "JAVA_URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5%2B11/OpenJDK21U-jdk_x64_windows_hotspot_21.0.5_11.msi"
+set "JAVA_URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5+11/OpenJDK21U-jdk_x64_windows_hotspot_21.0.5_11.msi"
+set "JAVA_MSI=%TEMP%\java21_deploycraft.msi"
 set "INSTALL_DIR=%USERPROFILE%\TLauncher"
 set "MC_DIR=%APPDATA%\.minecraft"
 set "LOG_FILE=%USERPROFILE%\Desktop\deploycraft-install.log"
 set "SHORTCUT=%USERPROFILE%\Desktop\TLauncher.bat"
+set "JAVA_EXE=java"
 
-:: Limpiar log anterior
 if exist "%LOG_FILE%" del "%LOG_FILE%"
 
 call :log "============================================"
@@ -26,200 +28,281 @@ call :log " %DATE% %TIME%"
 call :log "============================================"
 
 echo.
-echo  ██████╗ ███████╗██████╗ ██╗      ██████╗ ██╗   ██╗
-echo  ██╔══██╗██╔════╝██╔══██╗██║     ██╔═══██╗╚██╗ ██╔╝
-echo  ██║  ██║█████╗  ██████╔╝██║     ██║   ██║ ╚████╔╝ 
-echo  ██║  ██║██╔══╝  ██╔═══╝ ██║     ██║   ██║  ╚██╔╝  
-echo  ██████╔╝███████╗██║     ███████╗╚██████╔╝   ██║   
-echo  ╚═════╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝    ╚═╝   
-echo.
 echo  ============================================
-echo   Instalador de Minecraft para amigos v%VERSION%
+echo   DeployCraft Installer v%VERSION%
+echo   Minecraft para amigos
 echo  ============================================
 echo.
-call :print_info "Iniciando instalacion..."
+call :info "Iniciando instalacion..."
 echo.
 
-:: ─── PASO 1: VERIFICAR JAVA ─────────────────────────────────
-call :print_step "PASO 1/5" "Verificando Java..."
-call :log "Verificando Java..."
+:: ─────────────────────────────────────────────────────────────
+:: PASO 1 — JAVA
+:: FIX 1: Busca java en PATH y en rutas de instalacion conocidas
+:: FIX 2: Refresca PATH desde el registro (no de la sesion vieja)
+:: FIX 3: Verifica con java.exe real despues de instalar
+:: ─────────────────────────────────────────────────────────────
+call :step "PASO 1/5" "Verificando Java..."
 
-java -version >nul 2>&1
-if %errorlevel% == 0 (
-    for /f "tokens=3" %%g in ('java -version 2^>^&1 ^| findstr /i "version"') do (
-        set "JAVA_VER=%%g"
-    )
-    call :print_ok "Java encontrado: !JAVA_VER!"
-    call :log "Java encontrado: !JAVA_VER!"
-    set "JAVA_OK=1"
-) else (
-    call :print_warn "Java no encontrado. Se instalara Java 21..."
-    call :log "Java no encontrado. Iniciando descarga..."
-    set "JAVA_OK=0"
+call :find_java
+if "!JAVA_FOUND!"=="1" (
+    call :ok "Java encontrado: !JAVA_EXE!"
+    call :log "Java ya presente. Saltando instalacion."
+    goto :java_done
 )
 
-if "!JAVA_OK!"=="0" (
-    call :print_info "Descargando Java 21 Temurin (puede tardar unos minutos)..."
-    
-    powershell -Command "& {
-        $ProgressPreference = 'SilentlyContinue'
-        try {
-            Invoke-WebRequest -Uri '%JAVA_URL%' -OutFile '$env:TEMP\java21.msi' -UseBasicParsing
-        } catch {
-            Write-Host 'ERROR_DOWNLOAD'
-            exit 1
-        }
-    }"
-    
-    if not exist "%TEMP%\java21.msi" (
-        call :print_error "No se pudo descargar Java. Verifica tu conexion a internet."
-        call :log "ERROR: Fallo la descarga de Java."
-        call :finish_error
-        exit /b 1
-    )
-    
-    call :print_info "Instalando Java 21 (esto puede tardar 1-2 minutos)..."
-    msiexec /i "%TEMP%\java21.msi" /quiet /norestart
-    
-    if %errorlevel% neq 0 (
-        call :print_error "Fallo la instalacion de Java."
-        call :log "ERROR: msiexec fallo con codigo %errorlevel%"
-        call :finish_error
-        exit /b 1
-    )
-    
-    del "%TEMP%\java21.msi" >nul 2>&1
-    
-    :: Refrescar PATH para que java sea reconocido
-    for /f "tokens=*" %%i in ('powershell -Command "[System.Environment]::GetEnvironmentVariable(\"PATH\",\"Machine\")"') do set "PATH=%%i;%PATH%"
-    
-    call :print_ok "Java 21 instalado correctamente."
-    call :log "Java 21 instalado correctamente."
-)
+:: Java no disponible — descargar
+call :warn "Java no encontrado. Descargando Java 21 Temurin..."
+call :log "Iniciando descarga de Java 21 MSI..."
 
-:: ─── PASO 2: CREAR CARPETAS ─────────────────────────────────
-call :print_step "PASO 2/5" "Preparando carpetas..."
-call :log "Creando carpetas..."
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$ProgressPreference='SilentlyContinue';" ^
+    "try { Invoke-WebRequest -Uri '%JAVA_URL%' -OutFile '%JAVA_MSI%' -UseBasicParsing } catch { exit 1 }"
 
-if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-if not exist "%MC_DIR%" mkdir "%MC_DIR%"
-
-call :print_ok "Carpetas listas."
-call :log "Carpetas creadas: %INSTALL_DIR% | %MC_DIR%"
-
-:: ─── PASO 3: DESCARGAR TLAUNCHER ────────────────────────────
-call :print_step "PASO 3/5" "Descargando TLauncher..."
-call :log "Descargando TLauncher desde %TLAUNCHER_URL%"
-
-if exist "%INSTALL_DIR%\TLauncher.jar" (
-    call :print_ok "TLauncher ya estaba instalado. Actualizando..."
-    call :log "TLauncher existente encontrado. Reemplazando..."
-)
-
-powershell -Command "& {
-    $ProgressPreference = 'SilentlyContinue'
-    try {
-        Invoke-WebRequest -Uri '%TLAUNCHER_URL%' -OutFile '%INSTALL_DIR%\TLauncher.jar' -UseBasicParsing
-    } catch {
-        Write-Host 'ERROR_DOWNLOAD'
-        exit 1
-    }
-}"
-
-if not exist "%INSTALL_DIR%\TLauncher.jar" (
-    call :print_error "No se pudo descargar TLauncher. Verifica tu conexion."
-    call :log "ERROR: TLauncher.jar no descargado."
-    call :finish_error
+if not exist "%JAVA_MSI%" (
+    call :error "No se pudo descargar Java. Verifica tu conexion a internet."
+    call :log "ERROR: Fallo descarga de Java MSI."
+    call :abort
     exit /b 1
 )
 
-call :print_ok "TLauncher descargado correctamente."
-call :log "TLauncher.jar descargado en %INSTALL_DIR%"
+call :info "Instalando Java 21... no cierres esta ventana (1-2 min)..."
+call :log "Ejecutando msiexec con /wait..."
 
-:: ─── PASO 4: CONFIGURAR SERVIDOR ────────────────────────────
-call :print_step "PASO 4/5" "Configurando servidor de amigos..."
+:: FIX 3: START /WAIT garantiza que msiexec bloquea hasta terminar
+start /wait "" msiexec /i "%JAVA_MSI%" /quiet /norestart
+set "MSI_CODE=!errorlevel!"
+del "%JAVA_MSI%" >nul 2>&1
+
+if !MSI_CODE! neq 0 (
+    call :error "Fallo la instalacion de Java. Codigo: !MSI_CODE!"
+    call :log "ERROR: msiexec codigo !MSI_CODE!"
+    call :abort
+    exit /b 1
+)
+
+call :log "msiexec termino correctamente (codigo 0)."
+
+:: FIX 2: Refrescar PATH desde el registro del sistema, no de la sesion
+call :info "Actualizando variables de entorno..."
+call :log "Refrescando PATH desde registro..."
+
+for /f "skip=2 tokens=2,*" %%A in (
+    'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path 2^>nul'
+) do set "SYS_PATH=%%B"
+
+for /f "skip=2 tokens=2,*" %%A in (
+    'reg query "HKCU\Environment" /v Path 2^>nul'
+) do set "USR_PATH=%%B"
+
+if defined SYS_PATH (
+    if defined USR_PATH (
+        set "PATH=!SYS_PATH!;!USR_PATH!"
+    ) else (
+        set "PATH=!SYS_PATH!"
+    )
+)
+
+:: FIX 1: Verificacion real de Java post-instalacion
+call :info "Verificando que Java funciona..."
+call :log "Verificando Java post-instalacion..."
+
+call :find_java
+if "!JAVA_FOUND!"=="0" (
+    call :error "Java se instalo pero el sistema no lo reconoce aun."
+    call :warn "Cierra esta ventana, reinicia tu PC y vuelve a ejecutar el instalador."
+    call :log "ERROR: Java no verificable tras instalacion. Requiere reinicio."
+    call :abort
+    exit /b 1
+)
+
+call :ok "Java 21 instalado y verificado: !JAVA_EXE!"
+call :log "Java verificado OK: !JAVA_EXE!"
+
+:java_done
+
+:: ─────────────────────────────────────────────────────────────
+:: PASO 2 — CARPETAS
+:: ─────────────────────────────────────────────────────────────
+call :step "PASO 2/5" "Preparando carpetas..."
+call :log "Creando carpetas..."
+
+if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
+if not exist "%MC_DIR%"      mkdir "%MC_DIR%"
+
+call :ok "Carpetas listas."
+call :log "INSTALL_DIR=%INSTALL_DIR% | MC_DIR=%MC_DIR%"
+
+:: ─────────────────────────────────────────────────────────────
+:: PASO 3 — TLAUNCHER
+:: ─────────────────────────────────────────────────────────────
+call :step "PASO 3/5" "Descargando TLauncher..."
+call :log "Descargando TLauncher.jar desde GitHub Releases..."
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$ProgressPreference='SilentlyContinue';" ^
+    "try { Invoke-WebRequest -Uri '%TLAUNCHER_URL%' -OutFile '%INSTALL_DIR%\TLauncher.jar' -UseBasicParsing } catch { exit 1 }"
+
+if not exist "%INSTALL_DIR%\TLauncher.jar" (
+    call :error "No se pudo descargar TLauncher. Verifica tu internet."
+    call :log "ERROR: TLauncher.jar no descargado."
+    call :abort
+    exit /b 1
+)
+
+:: Verificar integridad basica (debe pesar mas de 1 MB)
+for %%F in ("%INSTALL_DIR%\TLauncher.jar") do set "JAR_SIZE=%%~zF"
+if !JAR_SIZE! LSS 1000000 (
+    call :error "El archivo descargado esta corrupto (!JAR_SIZE! bytes). Intenta de nuevo."
+    call :log "ERROR: TLauncher.jar muy pequeno: !JAR_SIZE! bytes"
+    del "%INSTALL_DIR%\TLauncher.jar" >nul 2>&1
+    call :abort
+    exit /b 1
+)
+
+call :ok "TLauncher descargado OK (!JAR_SIZE! bytes)."
+call :log "TLauncher.jar OK: !JAR_SIZE! bytes"
+
+:: ─────────────────────────────────────────────────────────────
+:: PASO 4 — SERVIDOR
+:: ─────────────────────────────────────────────────────────────
+call :step "PASO 4/5" "Configurando servidor DeployCraft..."
 call :log "Descargando servers.dat..."
 
-powershell -Command "& {
-    $ProgressPreference = 'SilentlyContinue'
-    try {
-        Invoke-WebRequest -Uri '%SERVERS_DAT_URL%' -OutFile '%MC_DIR%\servers.dat' -UseBasicParsing
-    } catch {
-        Write-Host 'WARN: No se pudo descargar servers.dat'
-    }
-}"
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$ProgressPreference='SilentlyContinue';" ^
+    "try { Invoke-WebRequest -Uri '%SERVERS_DAT_URL%' -OutFile '%MC_DIR%\servers.dat' -UseBasicParsing } catch { exit 1 }"
 
 if exist "%MC_DIR%\servers.dat" (
-    call :print_ok "Servidor DeployCraft configurado automaticamente."
-    call :log "servers.dat copiado en %MC_DIR%"
+    call :ok "Servidor DeployCraft preconfigurado en Multijugador."
+    call :log "servers.dat instalado en %MC_DIR%"
 ) else (
-    call :print_warn "No se pudo precargar el servidor. Debes agregarlo manualmente en Multijugador."
+    call :warn "Servidor no preconfigurado. Agregalo manual: deploycraft.falix.dev"
     call :log "WARN: servers.dat no descargado. Continuando..."
 )
 
-:: ─── PASO 5: ACCESO DIRECTO ─────────────────────────────────
-call :print_step "PASO 5/5" "Creando acceso directo en el Escritorio..."
-call :log "Creando acceso directo..."
+:: ─────────────────────────────────────────────────────────────
+:: PASO 5 — ACCESO DIRECTO
+:: ─────────────────────────────────────────────────────────────
+call :step "PASO 5/5" "Creando acceso directo en el Escritorio..."
+call :log "Creando TLauncher.bat en Escritorio..."
 
 (
     echo @echo off
-    echo start javaw -jar "%INSTALL_DIR%\TLauncher.jar"
+    echo start "" "!JAVA_EXE!" -jar "%INSTALL_DIR%\TLauncher.jar"
 ) > "%SHORTCUT%"
 
 if exist "%SHORTCUT%" (
-    call :print_ok "Acceso directo creado en el Escritorio."
-    call :log "Acceso directo creado: %SHORTCUT%"
+    call :ok "Acceso directo creado: TLauncher.bat"
+    call :log "Acceso directo OK: %SHORTCUT%"
 ) else (
-    call :print_warn "No se pudo crear el acceso directo."
-    call :log "WARN: No se pudo crear acceso directo."
+    call :warn "No se pudo crear el acceso directo."
+    call :log "WARN: Acceso directo no creado."
 )
 
-:: ─── LISTO ───────────────────────────────────────────────────
+:: ─────────────────────────────────────────────────────────────
+:: ABRIR TLAUNCHER + FIX 4: Verificar que el proceso levanta
+:: ─────────────────────────────────────────────────────────────
 echo.
 echo  ============================================
-echo.
-call :print_ok "INSTALACION COMPLETADA"
+call :ok "INSTALACION COMPLETADA"
 echo.
 echo   Que hacer ahora:
-echo   1. Doble clic en "TLauncher" en tu Escritorio
-echo   2. Escribe tu nick en el campo de abajo
-echo   3. Selecciona "Oficial 26.2"
-echo   4. Click en "Entrar al juego"
-echo   5. Multijugador ^> DeployCraft ya deberia aparecer
-echo      Si no aparece: Agregar servidor ^> deploycraft.falix.dev
-echo.
+echo   1. Escribe tu nick abajo a la izquierda en TLauncher
+echo   2. Selecciona "Oficial 26.2" en el desplegable
+echo   3. Click "Entrar al juego" (descarga la version la 1a vez)
+echo   4. Multijugador ^> DeployCraft ya aparece en la lista
+echo      Si no: Agregar servidor ^> deploycraft.falix.dev
 echo  ============================================
 echo.
-call :log "Instalacion completada exitosamente."
 
-:: Abrir TLauncher
-call :print_info "Abriendo TLauncher..."
-start "" javaw -jar "%INSTALL_DIR%\TLauncher.jar"
+call :info "Abriendo TLauncher..."
+call :log "Lanzando TLauncher con: !JAVA_EXE!"
+
+start "" "!JAVA_EXE!" -jar "%INSTALL_DIR%\TLauncher.jar"
+
+:: FIX 4: Esperar y verificar que el proceso java levanto
+call :info "Verificando que TLauncher inicio correctamente..."
+timeout /t 6 /nobreak >nul
+
+set "TLAUNCHER_OK=0"
+tasklist 2>nul | find /i "javaw.exe" >nul && set "TLAUNCHER_OK=1"
+if "!TLAUNCHER_OK!"=="0" (
+    tasklist 2>nul | find /i "java.exe" >nul && set "TLAUNCHER_OK=1"
+)
+
+if "!TLAUNCHER_OK!"=="1" (
+    call :ok "TLauncher corriendo correctamente."
+    call :log "TLauncher OK — proceso java detectado."
+) else (
+    call :warn "TLauncher puede no haber abierto automaticamente."
+    call :warn "Haz doble clic en 'TLauncher.bat' en tu Escritorio para abrirlo."
+    call :log "WARN: No se detecto proceso java tras 6 segundos."
+)
 
 echo.
+call :log "Script finalizado."
 pause
 exit /b 0
 
-:: ─── FUNCIONES ───────────────────────────────────────────────
+:: ─────────────────────────────────────────────────────────────
+:: SUBRUTINA: find_java
+:: Busca java en PATH y en rutas de instalacion conocidas.
+:: Setea JAVA_FOUND=1 y JAVA_EXE=<ruta> si lo encuentra.
+:: ─────────────────────────────────────────────────────────────
+:find_java
+set "JAVA_FOUND=0"
 
-:print_step
-echo.
-echo  [%~1] %~2
+java -version >nul 2>&1
+if !errorlevel! == 0 (
+    set "JAVA_EXE=java"
+    set "JAVA_FOUND=1"
+    goto :eof
+)
+
+for %%D in (
+    "%ProgramFiles%\Eclipse Adoptium"
+    "%ProgramFiles%\Microsoft"
+    "%ProgramFiles%\Java"
+    "%ProgramFiles(x86)%\Java"
+) do (
+    if exist "%%~D" (
+        for /d %%S in ("%%~D\jdk-21*" "%%~D\jre-21*") do (
+            if exist "%%S\bin\java.exe" (
+                "%%S\bin\java.exe" -version >nul 2>&1
+                if !errorlevel! == 0 (
+                    set "JAVA_EXE=%%S\bin\java.exe"
+                    set "JAVA_FOUND=1"
+                    goto :eof
+                )
+            )
+        )
+    )
+)
 goto :eof
 
-:print_ok
+:: ─────────────────────────────────────────────────────────────
+:: HELPERS DE OUTPUT
+:: ─────────────────────────────────────────────────────────────
+:step
+echo.
+echo  [%~1] %~2
+call :log "[STEP] %~1 %~2"
+goto :eof
+
+:ok
 echo  [+] %~1
 goto :eof
 
-:print_info
+:info
 echo  [*] %~1
 goto :eof
 
-:print_warn
+:warn
 echo  [!] %~1
 goto :eof
 
-:print_error
+:error
 echo.
 echo  [ERROR] %~1
 echo.
@@ -229,15 +312,15 @@ goto :eof
 echo [%DATE% %TIME%] %~1 >> "%LOG_FILE%"
 goto :eof
 
-:finish_error
+:abort
 echo.
 echo  ============================================
-echo  [ERROR] La instalacion no se completo.
-echo  Se genero un reporte en:
-echo  %LOG_FILE%
-echo  Comparte ese archivo para recibir ayuda.
+echo  Instalacion interrumpida.
+echo  Revisa el log en tu Escritorio:
+echo    deploycraft-install.log
+echo  Manda ese archivo por WhatsApp para ayuda.
 echo  ============================================
 echo.
-call :log "Instalacion finalizada CON ERRORES."
+call :log "Instalacion ABORTADA."
 pause
 goto :eof
