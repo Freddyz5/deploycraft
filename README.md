@@ -1,100 +1,61 @@
 # Minecraft Friends Installer
 
-Instalador multiplataforma para preparar automáticamente un entorno de Minecraft Java Edition utilizando TLauncher y conectar a un servidor privado compartido entre amigos.
+Página web para que el grupo de amigos instale TLauncher y se conecte al servidor compartido de Minecraft Java Edition sin complicarse.
 
 ## Objetivo
 
-Este proyecto busca simplificar al máximo el proceso de instalación y configuración para jugadores con poca experiencia técnica.
+Simplificar al máximo el proceso para jugadores con poca experiencia técnica: la página detecta el sistema operativo, lleva a la descarga oficial de TLauncher y explica paso a paso cómo instalarlo y conectarse al servidor.
 
-La idea es que cualquier persona pueda ejecutar un único instalador y tener todo listo para jugar en pocos minutos, sin necesidad de configurar Java, servidores, redes virtuales o archivos manualmente.
+## Qué incluye la página
 
-## Características Planeadas
+* Detección automática del sistema operativo (Windows / macOS).
+* Botón de descarga directo a la página oficial de TLauncher (tlauncher.org).
+* Instrucciones de instalación paso a paso para Windows y macOS.
+* Datos del servidor y cómo agregarlo en Minecraft.
+* Link para encender el servidor cuando está apagado (Falix).
+* Guía de juego en `guide/`.
 
-* Detección automática del sistema operativo.
-* Soporte para Windows y macOS.
-* Verificación de requisitos previos.
-* Instalación automática de Java.
-* Instalación automática de TLauncher.
-* Configuración inicial del entorno de Minecraft.
-* Configuración automática del servidor favorito.
-* Creación de accesos directos.
-* Validaciones y mensajes amigables para usuarios no técnicos.
-* Registro de errores para facilitar soporte.
+## Descargas de TLauncher
 
-## Flujo Esperado
+Los botones apuntan a los mismos enlaces que usa el botón de descarga de tlauncher.org:
 
-1. El usuario ejecuta el instalador.
-2. El instalador verifica requisitos.
-3. Si Java no está instalado, se instala automáticamente.
-4. Se descarga e instala TLauncher.
-5. Se configura el acceso al servidor compartido.
-6. Se crean accesos directos necesarios.
-7. Se abre TLauncher.
-8. El usuario inicia sesión y comienza a jugar.
+| Sistema | Enlace                            | Archivo                                    |
+| ------- | --------------------------------- | ------------------------------------------ |
+| Windows | `https://tlauncher.org/installer` | `TLauncher-Installer-x.x.x.exe`            |
+| macOS   | `https://tlauncher.org/jar`       | `TLauncher.zip` (contiene `TLauncher.jar`) |
+| Otros   | `https://tlauncher.org/en/`       | Página oficial                             |
+
+Si TLauncher cambia estos enlaces, se actualizan en `osConfig` dentro de `script.js`.
+
+## Flujo del jugador
+
+1. Entra a la página y descarga TLauncher con el botón.
+2. En Mac: instala Java desde java.com si no lo tiene (en Windows viene con el instalador).
+3. Instala / abre TLauncher siguiendo los pasos de su sistema.
+4. Pone su nick, elige la versión "Oficial 26.2" y entra al juego.
+5. Agrega el servidor en Multijugador y se conecta.
 
 ## Estructura del Proyecto
 
 ```text
-minecraft-friends-installer/
-│
-├── windows/
-│   └── install.ps1
-│
-├── macos/
-│   └── install.sh
-│
+deploycraft/
+├── index.html        # Página principal
+├── script.js         # Detección de SO, descargas, pasos y FAQ
+├── style.css
+├── guide/            # Guía de juego
 ├── assets/
-│   ├── servers.dat
-│   └── icons/
-│
-├── docs/
-│
-└── README.md
+│   └── servers.dat
+├── windows/          # Script experimental del instalador automático (sin uso)
+└── mac/              # Script experimental del instalador automático (sin uso)
 ```
 
-## Sistemas Operativos Soportados
+## Despliegue
 
-### Windows
-
-* Windows 10
-* Windows 11
-
-### macOS
-
-* Intel
-* Apple Silicon (M1, M2, M3 y posteriores)
-
-## Tecnologías
-
-* PowerShell
-* Bash
-* GitHub
-* GitHub Releases
-
-## Roadmap
-
-### Fase 1
-
-* [ ] Instalador Windows
-* [ ] Instalador macOS
-* [ ] Detección de Java
-* [ ] Instalación automática de Java
-
-### Fase 2
-
-* [ ] Instalación automática de TLauncher
-* [ ] Configuración automática del servidor
-* [ ] Creación de accesos directos
-
-### Fase 3
-
-* [ ] Interfaz gráfica
-* [ ] Actualizaciones automáticas
-* [ ] Soporte para múltiples servidores
+Sitio estático desplegado en Vercel.
 
 ## Contribuciones
 
-Este proyecto está pensado inicialmente para uso privado entre amigos, pero cualquier mejora o sugerencia es bienvenida.
+Este proyecto está pensado para uso privado entre amigos, pero cualquier mejora o sugerencia es bienvenida.
 
 ## Licencia
 

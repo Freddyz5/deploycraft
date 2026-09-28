@@ -1,115 +1,127 @@
 // ─── OS DETECTION & DOWNLOAD ──────────────────────────────────
-const RELEASES_BASE =
-	"https://github.com/Freddyz5/deploycraft/releases/download/v2.0.0";
+// Descargas oficiales de TLauncher (las mismas que usa el botón de tlauncher.org)
+const TLAUNCHER_SITE = "https://tlauncher.org/en/";
+const JAVA_URL = "https://www.java.com/es/download/";
 
 const osConfig = {
 	win: {
 		label: "Windows detectado",
-		btnText: "&#x25BA; DESCARGAR PARA WINDOWS",
-		file: "Installer.bat",
+		btnText: "&#x25BA; DESCARGAR TLAUNCHER PARA WINDOWS",
+		shortBtn: "&#x25BA; DESCARGAR .EXE",
+		url: "https://tlauncher.org/installer",
+		file: "TLauncher-Installer.exe",
+		java: "Incluido en el instalador",
 		altText:
-			"¿Usas Mac? <a onclick=\"triggerDownload('mac')\">Descarga para macOS</a>",
-		termTitle: "Windows — CMD",
-		termBody: `<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cmd">install.bat</span></div>
-<div class="term-output term-info">[INFO] Buscando TLauncher en el Escritorio...</div>
-<div class="term-output term-warn">[INFO] TLauncher no encontrado. Descargando...</div>
-<div class="term-output term-ok">[OK] TLauncher descargado en el Escritorio.</div>
-<div class="term-output term-ok">[OK] Abriendo TLauncher...</div>
-<div class="term-line"><span class="term-ps">C:\\Users\\Tú&gt;</span><span class="term-cursor"></span></div>`,
-		step2title: "Doble clic en install.bat",
-		step2desc:
-			'Si Windows pregunta, click en "Más información" → "Ejecutar de todas formas". Es seguro, puedes ver el código en GitHub.',
-		cmd: `${RELEASES_BASE}/Installer.bat`,
+			'¿Usas Mac? <a href="https://tlauncher.org/jar" target="_blank" rel="noopener">Descarga para macOS</a>',
+		title: "Windows — Descarga oficial",
+		steps: [
+			{
+				title: "Descarga el instalador",
+				desc: "Click en el botón de descarga. Se baja <strong>TLauncher-Installer.exe</strong> desde tlauncher.org, la página oficial.",
+			},
+			{
+				title: "Abre el .exe",
+				desc: 'Búscalo en tu carpeta Descargas y dale doble clic. Si aparece "Windows protegió tu PC", click en <strong>Más información</strong> → <strong>Ejecutar de todas formas</strong>.',
+			},
+			{
+				title: "Sigue el instalador",
+				desc: "Click en <strong>Siguiente</strong> e <strong>Instalar</strong>. Si te ofrece instalar programas extra (navegadores, antivirus), <strong>desmarca esas casillas</strong>. Si pide instalar Java, acepta.",
+			},
+			{
+				title: "Abre TLauncher y juega",
+				desc: 'Queda un acceso directo en el Escritorio. Pon tu nick, elige <strong>"Oficial 26.2"</strong>, click en <strong>Entrar al juego</strong> y agrega el servidor (datos abajo).',
+			},
+		],
 	},
 	mac: {
 		label: "macOS detectado",
-		btnText: "&#x25BA; DESCARGAR PARA MAC",
-		file: "Installer.zip",
+		btnText: "&#x25BA; DESCARGAR TLAUNCHER PARA MAC",
+		shortBtn: "&#x25BA; DESCARGAR .ZIP",
+		url: "https://tlauncher.org/jar",
+		file: "TLauncher.zip → TLauncher.jar",
+		java: `Necesario — <a href="${JAVA_URL}" target="_blank" rel="noopener">java.com</a>`,
 		altText:
-			"¿Usas Windows? <a onclick=\"triggerDownload('win')\">Descarga para Windows</a>",
-		termTitle: "macOS — Terminal",
-		termBody: `<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cmd">./Installer.app</span></div>
-<div class="term-output term-info">[INFO] Buscando TLauncher en el Escritorio...</div>
-<div class="term-output term-warn">[INFO] TLauncher no encontrado. Descargando...</div>
-<div class="term-output term-ok">[OK] TLauncher descargado en el Escritorio.</div>
-<div class="term-output term-ok">[OK] Abriendo TLauncher...</div>
-<div class="term-line"><span class="term-ps">usuario@mac ~ %</span><span class="term-cursor"></span></div>`,
-		step2title: "Doble clic en install.command",
-		step2desc:
-			'Si macOS bloquea el archivo, ve a Preferencias → Privacidad y Seguridad → "Abrir de todas formas".',
-		cmd: `${RELEASES_BASE}/Installer.zip`,
+			'¿Usas Windows? <a href="https://tlauncher.org/installer" target="_blank" rel="noopener">Descarga para Windows</a>',
+		title: "macOS — Descarga oficial",
+		steps: [
+			{
+				title: "Instala Java (si no lo tienes)",
+				desc: `TLauncher necesita Java en Mac. Descárgalo gratis en <a href="${JAVA_URL}" target="_blank" rel="noopener">java.com</a> e instálalo: <strong>ARM64</strong> si tu Mac es M1/M2/M3/M4, <strong>x64</strong> si es Intel.`,
+			},
+			{
+				title: "Descarga TLauncher",
+				desc: "Click en el botón de descarga. Se baja un <strong>.zip</strong> desde tlauncher.org. Dale doble clic para descomprimirlo y obtendrás <strong>TLauncher.jar</strong>. Muévelo al Escritorio o a Aplicaciones.",
+			},
+			{
+				title: "Ábrelo la primera vez",
+				desc: 'Clic derecho (o Control + clic) sobre <strong>TLauncher.jar</strong> → <strong>Abrir</strong> → <strong>Abrir</strong>. Si macOS lo bloquea: Ajustes del Sistema → Privacidad y seguridad → "Abrir de todas formas".',
+			},
+			{
+				title: "Entra al juego",
+				desc: 'Pon tu nick, elige <strong>"Oficial 26.2"</strong>, click en <strong>Entrar al juego</strong> y agrega el servidor (datos abajo). La próxima vez basta con doble clic.',
+			},
+		],
 	},
 	unknown: {
 		label: "Sistema no detectado",
-		btnText: "&#x25BA; VER DESCARGAS",
-		file: null,
+		btnText: "&#x25BA; IR A TLAUNCHER.ORG",
+		url: TLAUNCHER_SITE,
 		altText:
-			'<a href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">Ver todos los instaladores en GitHub</a>',
-		termTitle: "Terminal",
-		termBody: "",
-		step2title: "Ejecuta el installer",
-		step2desc: "Sigue las instrucciones para tu sistema operativo.",
-		cmd: "https://github.com/Freddyz5/deploycraft/releases",
+			'Elige tu sistema en la página oficial, o mira los <a href="#instalar">pasos de instalación</a>.',
 	},
 };
 
 function detectOS() {
 	const ua = navigator.userAgent;
 	if (/Windows/i.test(ua)) return "win";
-	if (/Mac/i.test(ua)) return "mac";
+	if (/Mac/i.test(ua) && !/iPhone|iPad/i.test(ua)) return "mac";
 	return "unknown";
 }
 
-let currentOS = detectOS();
+const detectedOS = detectOS();
 
-function triggerDownload(os) {
+function renderDownloadArea(os) {
 	const cfg = osConfig[os];
-	if (!cfg.file) {
-		window.open("https://github.com/Freddyz5/deploycraft/releases", "_blank");
-		return;
-	}
-	const a = document.createElement("a");
-	a.href = `${RELEASES_BASE}/${cfg.file}`;
-	a.download = cfg.file;
-	document.body.appendChild(a);
-	a.click();
-	document.body.removeChild(a);
-}
-
-function renderDownloadArea() {
-	const cfg = osConfig[currentOS];
 	document.getElementById("osDetected").innerHTML =
 		`Sistema detectado: <span>${cfg.label}</span>`;
-
-	const btn = document.getElementById("downloadBtn");
-	if (cfg.file) {
-		btn.innerHTML = `<button class="btn btn-primary" onclick="triggerDownload('${currentOS}')">${cfg.btnText}</button>`;
-	} else {
-		btn.innerHTML = `<a class="btn btn-primary" href="https://github.com/Freddyz5/deploycraft/releases" target="_blank">${cfg.btnText}</a>`;
-	}
-
-	document.getElementById("downloadAlts").innerHTML = cfg.altText;
+	document.getElementById("downloadBtn").innerHTML =
+		`<a class="btn btn-primary" href="${cfg.url}" target="_blank" rel="noopener">${cfg.btnText}</a>`;
+	document.getElementById("downloadAlts").innerHTML =
+		`${cfg.altText}<br />¿Ya lo descargaste? <a href="#instalar">Mira cómo instalarlo</a>`;
 }
 
-renderDownloadArea();
+function renderInstall(os) {
+	const cfg = osConfig[os];
+	document.getElementById("stepList").innerHTML = cfg.steps
+		.map(
+			(step, i) => `<div class="step-item" onclick="setStep(${i})">
+	<div class="step-num">0${i + 1}</div>
+	<div>
+		<div class="step-title">${step.title}</div>
+		<div class="step-desc">${step.desc}</div>
+	</div>
+</div>`,
+		)
+		.join("");
+	document.getElementById("dl-title").textContent = cfg.title;
+	document.getElementById("dl-file").textContent = cfg.file;
+	document.getElementById("dl-java").innerHTML = cfg.java;
+	const btn = document.getElementById("dl-btn");
+	btn.href = cfg.url;
+	btn.innerHTML = cfg.shortBtn;
+	document.getElementById("one-liner-cmd").textContent = cfg.url;
+	setStep(0);
+}
 
-// ─── STEPS / TERMINAL ────────────────────────────────────────
+// ─── STEPS ───────────────────────────────────────────────────
 function switchOS(os) {
-	currentOS = os;
 	document.querySelectorAll(".os-tab").forEach((t, i) => {
 		t.classList.toggle(
 			"active",
 			(i === 0 && os === "win") || (i === 1 && os === "mac"),
 		);
 	});
-	const cfg = osConfig[os];
-	document.getElementById("term-title").textContent = cfg.termTitle;
-	document.getElementById("term-body").innerHTML = cfg.termBody;
-	document.getElementById("step2title").textContent = cfg.step2title;
-	document.getElementById("step2desc").textContent = cfg.step2desc;
-	document.getElementById("one-liner-cmd").textContent = cfg.cmd;
-	renderDownloadArea();
-	setStep(0);
+	renderInstall(os);
 }
 
 function setStep(idx) {
@@ -117,6 +129,10 @@ function setStep(idx) {
 		.querySelectorAll(".step-item")
 		.forEach((el, i) => el.classList.toggle("active", i === idx));
 }
+
+renderDownloadArea(detectedOS);
+// Las pestañas de instalación solo tienen Windows y Mac
+switchOS(detectedOS === "unknown" ? "win" : detectedOS);
 
 function promptManualCopy(text) {
 	window.prompt("Copia este enlace manualmente:", text);
@@ -153,69 +169,6 @@ function toggleFaq(btn) {
 		.querySelectorAll(".faq-item")
 		.forEach((i) => i.classList.remove("open"));
 	if (!wasOpen) item.classList.add("open");
-}
-
-// ─── BIRTHDAY FORM ───────────────────────────────────────────
-// Frontend y API desplegados juntos en Vercel.
-const API_URL = "/api/birthday";
-
-async function submitBirthday() {
-	const name = document.getElementById("bdName").value.trim();
-	const date = document.getElementById("bdDate").value;
-	const contact = document.getElementById("bdContact").value.trim();
-
-	if (!name) {
-		alert("Pon tu nombre para poder avisarte 🙂");
-		document.getElementById("bdName").focus();
-		return;
-	}
-	if (!date) {
-		alert("Pon tu fecha de cumpleaños");
-		document.getElementById("bdDate").focus();
-		return;
-	}
-
-	const btn = document.getElementById("bdSubmit");
-	btn.disabled = true;
-	btn.innerHTML = "&#x25BA; GUARDANDO...";
-
-	try {
-		const res = await fetch(API_URL, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ name, birthdate: date, contact }),
-		});
-
-		if (!res.ok) {
-			const body = await res.json().catch(() => ({}));
-			throw new Error(body.error ?? `HTTP ${res.status}`);
-		}
-
-		showState("success");
-	} catch (err) {
-		console.error("Birthday submit error:", err);
-		document.getElementById("errorDesc").textContent =
-			err.message || "No se pudo guardar. Intenta de nuevo.";
-		showState("error");
-	} finally {
-		btn.disabled = false;
-		btn.innerHTML = "&#x25BA; GUARDAR MI CUMPLE";
-	}
-}
-
-function showState(state) {
-	document.getElementById("formFields").style.display = "none";
-	if (state === "success") {
-		document.getElementById("stateSuccess").classList.add("visible");
-	} else {
-		document.getElementById("stateError").classList.add("visible");
-	}
-}
-
-function resetForm() {
-	document.getElementById("formFields").style.display = "block";
-	document.getElementById("stateError").classList.remove("visible");
-	document.getElementById("stateSuccess").classList.remove("visible");
 }
 
 // ─── STARS ───────────────────────────────────────────────────
