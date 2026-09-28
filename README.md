@@ -43,6 +43,7 @@ deploycraft/
 ├── script.js         # Detección de SO, descargas, pasos y FAQ
 ├── style.css
 ├── guide/            # Guía de juego
+│   └── img/          # Mobs, biomas e íconos de ítems (de Minecraft Wiki, © Mojang)
 ├── assets/
 │   └── servers.dat
 ├── windows/          # Script experimental del instalador automático (sin uso)

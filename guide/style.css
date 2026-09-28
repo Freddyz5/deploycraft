@@ -374,6 +374,18 @@ nav {
 	flex-shrink: 0;
 }
 
+/* Ícono en un casillero gris estilo inventario, para que los ítems oscuros se vean */
+.progress-num img,
+.speedrun-dot img {
+	width: 40px;
+	height: 40px;
+	padding: 5px;
+	image-rendering: pixelated;
+	background: #8b8b8b;
+	box-shadow:
+		inset 2px 2px 0 #373737,
+		inset -2px -2px 0 #c6c6c6;
+}
 .progress-body {
 	padding: 1.1rem 1.4rem;
 }
@@ -471,15 +483,34 @@ nav {
 	border-color: var(--green-dark);
 }
 
+.mob-portrait {
+	height: 120px;
+	margin: -1.1rem -1.3rem 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(
+		ellipse at 50% 85%,
+		rgba(102, 187, 106, 0.14),
+		transparent 70%
+	);
+	border-bottom: 1px solid var(--border);
+}
+.mob-portrait img {
+	max-width: 70%;
+	max-height: 100px;
+	object-fit: contain;
+	filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45));
+	transition: transform 0.2s;
+}
+.mob-card:hover .mob-portrait img {
+	transform: translateY(-3px);
+}
 .mob-header {
 	display: flex;
 	align-items: center;
 	gap: 0.6rem;
 	margin-bottom: 0.2rem;
-}
-.mob-emoji {
-	font-size: 1.5rem;
-	line-height: 1;
 }
 .mob-name {
 	font-family: "VT323", monospace;
@@ -541,6 +572,14 @@ nav {
 .biome-card {
 	border: 1px solid var(--border);
 	overflow: hidden;
+	background: var(--sky);
+}
+.biome-img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	background: var(--surface2);
 }
 .biome-header {
 	padding: 0.75rem 1.1rem;
@@ -609,6 +648,41 @@ nav {
 	color: var(--gold);
 	margin-bottom: 0.75rem;
 	letter-spacing: 0.05em;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.recipe-name-icon {
+	width: 24px;
+	height: 24px;
+	image-rendering: pixelated;
+}
+.recipe-craft {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+.recipe-craft .recipe-table {
+	margin-bottom: 0;
+}
+.recipe-arrow {
+	font-size: 1.4rem;
+	color: var(--text-muted);
+}
+.recipe-icon {
+	width: 28px;
+	height: 28px;
+	image-rendering: pixelated;
+}
+.recipe-result {
+	width: 48px;
+	height: 48px;
+	border-color: var(--gold);
+}
+.recipe-result .recipe-icon {
+	width: 36px;
+	height: 36px;
 }
 .recipe-table {
 	display: grid;
@@ -628,7 +702,7 @@ nav {
 	image-rendering: pixelated;
 }
 .recipe-cell.empty {
-	opacity: 0.3;
+	opacity: 0.5;
 }
 .recipe-desc {
 	font-size: 0.83rem;
